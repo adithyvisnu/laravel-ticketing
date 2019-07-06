@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/datatable.css')}}">
     <script src="{{asset('js/app.js')}}"></script>
     <title>Ticketing Helpdesk - V1.0.0</title>
 </head>
@@ -31,5 +32,11 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/datatables.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#data-table').DataTable();
+        } );
+    </script>
 </body>
 </html>

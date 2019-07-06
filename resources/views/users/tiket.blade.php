@@ -80,17 +80,10 @@
             </fieldset>
         </div>
     </div>
-    <div class="row" style="margin-top:40px">
-        <form class="form-inline">
-            <div class="form-group mx-sm-3 mb-2">
-                <input type="password" class="form-control" name="keywords" placeholder="Nama Layanan / Service ID / Ticket ID">
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">Cari</button>
-        </form>
-    </div>
+    <br><br>
     <div class="row">
         <div class="col">
-            <table class="table">
+            <table id="data-table" class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Tiket ID</th>

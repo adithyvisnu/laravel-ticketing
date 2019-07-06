@@ -27,7 +27,7 @@
             </fieldset>
         </div>
         <div class="col">
-            <table class="table">
+            <table id="data-table" class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">ID Jabatan</th>

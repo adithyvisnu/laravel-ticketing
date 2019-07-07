@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/datatable.css')}}">
@@ -12,7 +13,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3" style="border-right:1px solid cadetblue; height:100%;">
+            <div class="col-2" style="border-right:1px solid cadetblue; height:100%;">
                 <br>
                 <br>
                 <br>
@@ -25,7 +26,7 @@
                     <a class="btn btn-info" style="bottom:0; margin-bottom: 10%"> Logout </a>
                 </div>
             </div>  
-            <div class="col-9">
+            <div class="col-10 p-5">
                 @yield('content')
             </div>
         </div>

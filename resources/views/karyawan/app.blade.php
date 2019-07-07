@@ -18,10 +18,12 @@
                 <br>
                 <br>
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background: ">
-                    <a href="/pelanggan/layanan" class="nav-link @if ($menu == 'layanan') active @endif">Layanan</a>
-                    <a href="/pelanggan/tiket-gangguan" class="nav-link @if ($menu == 'tiket') active @endif">Tiket Gangguan</a>
-                    <a href="/pelanggan/laporan/layanan" class="nav-link @if ($menu == 'lapLayanan') active @endif">Laporan Layanan</a>
-                    <a href="/pelanggan/laporan/restitusi" class="nav-link @if ($menu == 'lapRestitusi') active @endif">Laporan Restitusi</a>
+                    <a href="/karyawan/tiket" class="nav-link @if ($menu == 'tiket') active @endif">Tiket Gangguan</a>
+                    <a href="/karyawan/aktivasi" class="nav-link @if ($menu == 'aktivasi') active @endif">Aktivasi Pelanggan</a>
+                    <a href="/karyawan/pembayaran/restitusi" class="nav-link @if ($menu == 'bayarRestitusi') active @endif">Pembayaran Restitusi</a>
+                    <a href="/karyawan/pemetaan-solusi" class="nav-link @if ($menu == 'solusiKeluhan') active @endif">Pemetaan Solusi-Keluhan</a>
+                    <a href="/karyawan/laporan/tiket" class="nav-link @if ($menu == 'lapTiket') active @endif">Laporan Tiket</a>
+                    <a href="/karyawan/laporan/restitusi" class="nav-link @if ($menu == 'lapRestitusi') active @endif">Laporan Restitusi</a>
                 </div>
                 <div class="position-absolute" style="margin-bottom: 0%;padding:10px">
                     <a class="btn btn-info" style="bottom:0; margin-bottom: 10%"> Logout </a>

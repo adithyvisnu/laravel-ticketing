@@ -57,6 +57,5 @@
         <div class="col">Menampilkan Periode: Januari 2019</div>
         <div class="col"><a href="">Lihat Bukti Transfer</a></div>
         <div class="col-2 text-right"><button class="btn btn-success">Download</button></div>
-        <div class="col-2 text-right">< 1 2 3 4 5 ></div>
     </div>
 @endsection

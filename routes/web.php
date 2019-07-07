@@ -24,3 +24,10 @@ Route::get('/pelanggan/layanan', 'PelangganController@Layanan');
 Route::get('/pelanggan/tiket-gangguan', 'PelangganController@TiketGangguan');
 Route::get('/pelanggan/laporan/layanan', 'PelangganController@LaporanLayanan');
 Route::get('/pelanggan/laporan/restitusi', 'PelangganController@LaporanRestitusi'); 
+
+Route::get('/karyawan/tiket', 'KaryawanController@TiketGangguan');
+Route::get('/karyawan/aktivasi', 'KaryawanController@AktivasiPelanggan');
+Route::get('/karyawan/pembayaran/restitusi', 'KaryawanController@PembayaranRestitusi');
+Route::get('/karyawan/pemetaan-solusi', 'KaryawanController@PemetaanSolusi');
+Route::get('/karyawan/laporan/tiket', 'KaryawanController@LaporanTiket');
+Route::get('/karyawan/laporan/restitusi', 'KaryawanController@LaporanRestitusi');

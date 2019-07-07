@@ -14,7 +14,7 @@ class CreateJenisKeluhansTable extends Migration
     public function up()
     {
         Schema::create('jenis_keluhan', function (Blueprint $table) {
-            $table->increment('kode_jenis_keluhan');
+            $table->increments('kode_jenis_keluhan');
             $table->char('jenis_keluhan', 40)->default('');
         });
     }
@@ -26,6 +26,6 @@ class CreateJenisKeluhansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_keluhans');
+        Schema::dropIfExists('jenis_keluhan');
     }
 }

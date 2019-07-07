@@ -14,7 +14,7 @@ class CreatePelanggansTable extends Migration
     public function up()
     {
         Schema::create('pelanggan', function (Blueprint $table) {
-            $table->increment('kode_pelanggan');
+            $table->increments('kode_pelanggan');
             $table->char('nama_pelanggan', 50)->default('');
             $table->char('email_pelanggan', 50)->default('');
             $table->char('pawssword', 255)->default('');
@@ -32,6 +32,6 @@ class CreatePelanggansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pelanggans');
+        Schema::dropIfExists('pelanggan');
     }
 }

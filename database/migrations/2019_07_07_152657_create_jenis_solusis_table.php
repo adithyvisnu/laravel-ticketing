@@ -14,7 +14,7 @@ class CreateJenisSolusisTable extends Migration
     public function up()
     {
         Schema::create('jenis_solusi', function (Blueprint $table) {
-            $table->increment('kode_jenis_solusi');
+            $table->increments('kode_jenis_solusi');
             $table->char('jenis_solusi', 40)->default('');
             $table->integer('kode_jenis_keluhan')->unsigned();
             $table->foreign('kode_jenis_keluhan')->references('kode_jenis_keluhan')->on('jenis_keluhan')->onDelete('cascade');
@@ -28,6 +28,6 @@ class CreateJenisSolusisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jenis_solusis');
+        Schema::dropIfExists('jenis_solusi');
     }
 }

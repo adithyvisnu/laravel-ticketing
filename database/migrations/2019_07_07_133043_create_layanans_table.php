@@ -28,6 +28,6 @@ class CreateLayanansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('layanans');
+        Schema::dropIfExists('layanan');
     }
 }

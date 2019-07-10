@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TicketController extends Controller
+class DetilKontrakController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jabatan;
 
-class TicketController extends Controller
+class JabatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,6 +36,10 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         //
+        $j = new Jabatan;
+        $j->nama_jabatan = $request->input('nama_jabatan');
+        $j->save();
+        return redirect('/admin/jabatan');
     }
 
     /**

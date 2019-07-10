@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jabatan;
 
 class AdminController extends Controller
 {
@@ -21,7 +22,8 @@ class AdminController extends Controller
         # code...
         $data = [
             "title" => 'Data Jabatan',
-            "menu" => 'jabatan'
+            "menu" => 'jabatan',
+            "dataJabatan" => Jabatan::all()
         ];
         return view('admin.jabatan')->with($data);
     }

@@ -31,3 +31,16 @@ Route::get('/karyawan/pembayaran/restitusi', 'KaryawanController@PembayaranResti
 Route::get('/karyawan/pemetaan-solusi', 'KaryawanController@PemetaanSolusi');
 Route::get('/karyawan/laporan/tiket', 'KaryawanController@LaporanTiket');
 Route::get('/karyawan/laporan/restitusi', 'KaryawanController@LaporanRestitusi');
+
+Route::resource('jabatan', 'JabatanController');
+Route::resource('ticket', 'TicketController');
+Route::resource('jenis-keluhan', 'JenisKeluhanController');
+Route::resource('jenis-solusi', 'JenisSolusiController');
+Route::resource('detil-solusi', 'DetilSolusiController');
+Route::resource('ba-solusi', 'BASolusiController');
+Route::resource('ba-selesai', 'BASelesaiController');
+Route::resource('layanan', 'LayananController');
+Route::resource('kontrak', 'KontrakController');
+Route::resource('detil-kontrak', 'DetilKontrakController');
+Route::resource('restitusi', 'RestitusiController');
+Route::resource('bukti-transfer', 'BuktiTransferController');

@@ -17,10 +17,11 @@
         <div class="col-lg-3">
             <fieldset class="border p-2">
                 <legend>Form Jabatan</legend>
-                <form action="">
+                <form action="/jabatan" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label>Nama Jabatan</label>
-                        <input type="text" maxlength="50" name="jabatan" class="form-control">
+                        <input type="text" maxlength="50" name="nama_jabatan" class="form-control">
                     </div>
                     <input type="submit" class="btn btn-success float-right" value="Add">
                 </form>
@@ -36,21 +37,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Ubah</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Ubah</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>Ubah</td>
-                    </tr>
+                    @if(count($dataJabatan) > 0)
+                        @foreach ($dataJabatan as $j)
+                        <tr>
+                            <th scope="row">{{$j->kode_jabatan}}</th>
+                            <td>{{$j->nama_jabatan}}</td>
+                            <td><a href="">Ubah</a></td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <th colspan="3" scope="row">Data Jabatan Tidak ada di Sistem</th>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

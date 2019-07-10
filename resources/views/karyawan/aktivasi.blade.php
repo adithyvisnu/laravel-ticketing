@@ -7,7 +7,8 @@
             <div class="row">
                 <div class="col-5">
                     <legend>Aktivasi Pelanggan</legend>
-                    <form action="">
+                    <form action="/pelanggan" method="POST">
+                        {{crsf_field()}}
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Nama Pelanggan</label>
                             <div class="col">
@@ -61,11 +62,13 @@
                                 <div>
                                     <label>Layanan</label><br>
                                     <select class="form-control" name="id_jenis_solusi">
+                                    @foreach ($dataLayanan as $l)
+                                        <option value="{{$l->kode_layanan}}">{{$l->nama_layanan}}</option>
+                                    @endforeach
                                         <option value="1">VPN IP</option>
                                         <option value="2">Router</option>
                                         <option value="3">Astinet</option>
                                     </select>
-                                    
                                     <label>Alamat</label><br>
                                     <textarea class="form-control" maxlength="255" class="form-control"></textarea>
                                 </div>

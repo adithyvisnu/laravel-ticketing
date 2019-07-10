@@ -6,7 +6,8 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Form Jenis Keluhan</legend>
-                <form action="">
+                <form action="/jenis-keluhan" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
                         <div class="col-lg-6">
@@ -28,11 +29,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Jaringan Tidak Stabil</td>
-                                <td><a href="">Hapus</a></td>
-                            </tr>
+                        @if(count($dataJenisKeluhan) > 0)
+                            @foreach ($dataJenisKeluhan as $jk)
+                                <tr>
+                                    <th scope="row">{{$jk->kode_jenis_keluhan}}</th>
+                                    <td>{{$jk->jenis_keluhan}}</td>
+                                    <td><a href="">Hapus</a></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr><td colspan="3">Data Jenis Keluhan belum tersedia di sistem</td></tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -41,7 +48,8 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Form Jenis Solusi</legend>
-                <form action="">
+                <form action="/jenis-solusi" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Form Jenis Solusi</label>
                         <div class="col-lg-6">
@@ -52,11 +60,9 @@
                         <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
                         <div class="col-lg-6">
                             <select class="form-control" name="id_jenis_keluhan">
-                                <option value="1">Jaringan Tidak Stabil</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            @foreach ($dataJenisKeluhan as $jk)
+                                <option value="{{$jk->kode_jenis_keluhan}}">{{$jk->jenis_keluhan}}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -76,12 +82,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Jaringan Tidak Stabil</td>
-                                    <td>4</td>
-                                    <td><a href="">Hapus</a></td>
-                                </tr>
+                            @if(count($dataJenisSolusi) > 0)
+                                @foreach ($dataJenisSolusi as $js)
+                                    <tr>
+                                        <th scope="row">{{$js->kode_jenis_solusi}}</th>
+                                        <td>{{$js->jenis_solusi}}</td>
+                                        <td>{{$js->kode_jenis_keluhan}}</td>
+                                        <td><a href="">Hapus</a></td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr><td colspan="4">Data Jenis Keluhan belum tersedia di sistem</td></tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>

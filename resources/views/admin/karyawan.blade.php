@@ -6,11 +6,12 @@
         <div class="col-lg-8">
             <fieldset class="border p-2">
                 <legend>Form Karyawan</legend>
-                <form action="">
+                <form action="/karyawan" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group row" style="width:100%">
                         <label class="col-lg-2 col-form-label">NIK</label>
                         <div class="col">
-                            <input type="text" maxlength="40" class="form-control" name="nama_karyawan" >
+                            <input type="text" maxlength="40" class="form-control" name="nik" >
                         </div>
                         <label class="col-lg-2 col-form-label">Email Karyawan</label>
                         <div class="col">
@@ -37,11 +38,9 @@
                         <label class="col-lg-2 col-form-label">Jabatan</label>
                         <div class="col-lg-4">
                             <select class="form-control" name="kode_jabatan">
-                                <option value="1">Manager</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                @foreach ($dataJabatan as $j)
+                                    <option value="{{$j->kode_jabatan}}">{{$j->nama_jabatan}}</option>                                    
+                                @endforeach
                             </select>
                         </div>
                         <div class="col">
@@ -77,14 +76,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Ubah</td>
-                        <td>Ubah</td>
-                        <td>Ubah</td>
-                        <td>Ubah</td>
-                    </tr>
+                @if(count($dataJabatan) > 0)
+                    @foreach ($dataJabatan as $j)
+                        <tr>
+                            <th scope="row">{{$j->nik}}</th>
+                            <td>{{$j->nama_karyawan}}</td>
+                            <td>{{$j->nomor_telepon}}</td>
+                            <td>{{$j->jabatan}}</td>
+                            <td>{{$j->email}}</td>
+                            <td><a>Ubah</a></td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr><td colspan="6">Data Karyawan belum tersedia di sistem</td></tr>
+                @endif
                 </tbody>
             </table>
         </div>

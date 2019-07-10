@@ -6,7 +6,8 @@
         <div class="col">
             <fieldset class="border p-1">
                 <legend>Submit Tiket Gangguan</legend>
-                <form action="">
+                <form action="/ticket" method="POST">
+                    {{ csrf_field() }}
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Ticket ID</label>
                         <div class="col-lg-6">
@@ -16,12 +17,13 @@
                     <div class="form-group row">                    
                         <label class="col-lg-3 col-form-label">Service ID</label>
                         <div class="col-lg-6">
-                            <select class="form-control" name="service_id">
-                                <option value="1">Manager</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <select class="form-control" name="service_id" >
+                            @foreach ($dataDetilKontrak as $dk)
+                                <option value="{{$dk->kode_service_id}}">
+                                    {{$dk->kode_service_id}}
+                                    <br> - <small>{{$dk->alamat}}</small>
+                                </option>                                    
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -29,11 +31,9 @@
                         <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
                         <div class="col-lg-6">
                             <select class="form-control" name="id_jenis_keluhan">
-                                <option value="1">Jaringan Tidak Stabil</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            @foreach ($dataJenisKeluhan as $jk)
+                                <option value="{{$jk->kode_jenis_keluhan}}">{{$jk->jenis_keluhan}}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -50,8 +50,8 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Close Tiket Gangguan</legend>
-                    <form action="">
-                        
+                    <form action="/ba-selesai" method="POST">
+                        {{ csrf_field() }}
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Tiket ID</label>
                             <label class="col-lg-3 col-form-label">IN1001929</label>
@@ -75,7 +75,6 @@
                                     <input type="submit" class="btn btn-success float-right" value="Close Tiket Gangguan">
                             </div>
                         </div>        
-                        
                     </form>
             </fieldset>
         </div>
@@ -97,6 +96,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if(count($dataTicket) > 0)
+                    @foreach ($dataTicket as $t)
+                    <tr>
+                        <th scope="row">{{$t->kode_tiket}}</th>
+                        <td>{{$t->kode_service_id}}</td>
+                        <td>{{$t->jenis_keluhan}}</td>
+                        <td>{{$t->open_time}}</td>
+                        <td>{{$t->ba_time}}</td>
+                        <td>{{$t->close_time}}</td>
+                        <td>{{$t->pic}}</td>
+                        <td><a>Open Tiket</a></td>
+                    </tr>
+                    @endforeach
+                @else
+                    <tr><td colspan="6">Data Tiket tidak tersedia di sistem</td></tr>
+                @endif
                     <tr>
                         <th scope="row">IN1001929</th>
                         <td>442003992-1299101</td>

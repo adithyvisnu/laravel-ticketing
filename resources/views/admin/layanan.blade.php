@@ -6,7 +6,8 @@
         <div class="col-lg-6">
             <fieldset class="border p-1">
                 <legend>Form Layanan</legend>
-                <form action="">
+                <form action="/layanan" method="POST">
+                    {{ csrf_field() }}
                     <table>
                         <tr>
                             <td width="70%">
@@ -58,12 +59,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Ubah</td>
-                        <td>Ubah</td>
-                    </tr>
+                @if(count($dataLayanan) > 0)
+                    @foreach ($dataLayanan as $l)
+                        <tr>
+                            <th scope="row">$l->kode_layanan</th>
+                            <td>$l->nama_layanan</td>
+                            <td>$l->konfigurasi_layanan</td>
+                            <td>$l->harga_layanan</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr><th scope="row">Data Layanan tidak terdapat di Sistem</th></tr>
+                @endif
                 </tbody>
             </table>
         </div>

@@ -14,7 +14,7 @@ class CreateJenisKeluhansTable extends Migration
     public function up()
     {
         Schema::create('jenis_keluhan', function (Blueprint $table) {
-            $table->increments('kode_jenis_keluhan');
+            $table->unsignedTinyInteger('kode_jenis_keluhan')->autoIncrement();
             $table->char('jenis_keluhan', 40)->default('');
         });
     }

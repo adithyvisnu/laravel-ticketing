@@ -27,7 +27,7 @@
                             <td class="p-1">
                                 <div class="form-group">
                                     <label>Harga (dalam rupiah)</label>
-                                    <input type="text" pattern="^[0-9]{,8}$" class="form-control" maxlength="8" name="harga_layanan">
+                                    <input type="number" min="0" max="99999999" class="form-control" maxlength="8" name="harga_layanan">
                                 </div>
                             </td>
                         </tr>
@@ -62,10 +62,10 @@
                 @if(count($dataLayanan) > 0)
                     @foreach ($dataLayanan as $l)
                         <tr>
-                            <th scope="row">$l->kode_layanan</th>
-                            <td>$l->nama_layanan</td>
-                            <td>$l->konfigurasi_layanan</td>
-                            <td>$l->harga_layanan</td>
+                            <th scope="row">{{$l->kode_layanan}}</th>
+                            <td>{{$l->nama_layanan}}</td>
+                            <td>{{$l->konfigurasi_layanan}}</td>
+                            <td>Rp {{number_format($l->harga)}}</td>
                         </tr>
                     @endforeach
                 @else

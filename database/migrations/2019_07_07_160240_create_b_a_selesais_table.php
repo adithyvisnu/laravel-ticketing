@@ -15,7 +15,7 @@ class CreateBASelesaisTable extends Migration
     {
         Schema::create('ba_selesai', function (Blueprint $table) {
             $table->increments('kode_ba_selesai');
-            $table->bigInteger('kode_tiket')->nullable(false);
+            $table->integer('kode_tiket')->unsigned();
             $table->char('tanggal_ba_selesai',24);
             $table->char('selesai_oleh', 50);
             $table->char('bukti_ba_selesai', 255)->default('');

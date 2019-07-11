@@ -3,10 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Karyawan;
+use App\Layanan;
 
 class KaryawanController extends Controller
 {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $k = new Karyawan;
+        $k->nik = $request->input('nik');
+        $k->nama_karyawan = $request->input('nama_karyawan');
+        $k->email_karyawan = $request->input('email_karyawan');
+        $k->password = \Hash::make($request->input('password'));
+        $k->no_telepon = $request->input('nomor_telepon');
+        $k->kode_jabatan = $request->input('kode_jabatan');
+        $k->save();
+        return redirect('/admin/karyawan');
+    }
+
     public function TiketGangguan()
     {
          $data = [
@@ -19,7 +39,8 @@ class KaryawanController extends Controller
     public function AktivasiPelanggan() {
          $data = [
             "title" => "Aktivasi dan Data Pelanggan",
-            "menu" => "aktivasi"
+            "menu" => "aktivasi",
+            "dataLayanan" => Layanan::all()
         ];
         return view('karyawan.aktivasi')->with($data);
     }

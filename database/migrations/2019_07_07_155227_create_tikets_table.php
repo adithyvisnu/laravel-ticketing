@@ -14,15 +14,16 @@ class CreateTiketsTable extends Migration
     public function up()
     {
         Schema::create('tiket', function (Blueprint $table) {
-            $table->bigInteger('kode_tiket')->nullable(false);
-            $table->primary('kode_tiket');
+            $table->increments('kode_tiket');
             $table->char('tanggal_waktu_buat', 24);
             $table->char('tanggal_waktu_selesai', 24);
             $table->char('keterangan_keluhan', 255);
-            $table->integer('kode_pelanggan')->unsigned();
-            $table->integer('kode_jenis_keluhan')->unsigned();
+            $table->unsignedMediumInteger('kode_pelanggan');
+            $table->unsignedTinyInteger('kode_jenis_keluhan');
+            $table->char('kode_service_id', 19);
             $table->foreign('kode_pelanggan')->references('kode_pelanggan')->on('pelanggan')->onDelete('cascade');
             $table->foreign('kode_jenis_keluhan')->references('kode_jenis_keluhan')->on('jenis_keluhan')->onDelete('cascade');
+            $table->foreign('kode_service_id')->references('kode_service_id')->on('detil_kontrak')->onDelete('cascade');
         });
     }
 

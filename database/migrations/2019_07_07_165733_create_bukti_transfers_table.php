@@ -19,7 +19,7 @@ class CreateBuktiTransfersTable extends Migration
             $table->char('bukti_transfer', 255)->default('');
             $table->decimal('jumlah_transfer', 9);
             $table->char('periode_layanan', 6)->default('');
-            $table->integer('kode_pelanggan')->unsigned();
+            $table->unsignedMediumInteger('kode_pelanggan');
             $table->foreign('kode_pelanggan')->references('kode_pelanggan')->on('pelanggan')->onDelete('cascade');
         });
     }

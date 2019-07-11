@@ -15,7 +15,7 @@ class CreateBASolusisTable extends Migration
     {
         Schema::create('ba_solusi', function (Blueprint $table) {
             $table->increments('kode_ba_solusi');
-            $table->bigInteger('kode_tiket')->nullable(false);
+            $table->integer('kode_tiket')->unsigned();
             $table->char('tanggal_ba_solusi', 24)->default('');
             $table->foreign('kode_tiket')->references('kode_tiket')->on('tiket')->onDelete('cascade');
         });

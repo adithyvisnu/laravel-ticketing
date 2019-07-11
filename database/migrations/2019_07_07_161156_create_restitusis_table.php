@@ -14,11 +14,10 @@ class CreateRestitusisTable extends Migration
     public function up()
     {
         Schema::create('restitusi', function (Blueprint $table) {
-            $table->decimal('kode_restitusi', 26)->nullable(false);
-            $table->primary('kode_restitusi');
+            $table->increments('kode_restitusi');
             $table->char('tanggal_waktu_terbit', 24)->default();
             $table->integer('jumlah')->unsigned()->nullable(false);
-            $table->bigInteger('kode_tiket')->nullable(false);
+            $table->integer('kode_tiket')->unsigned();
             $table->foreign('kode_tiket')->references('kode_tiket')->on('tiket')->onDelete('cascade');
         });
     }

@@ -14,7 +14,7 @@ class CreateJabatansTable extends Migration
     public function up()
     {
         Schema::create('jabatan', function (Blueprint $table) {
-            $table->increments('kode_jabatan');
+            $table->unsignedTinyInteger('kode_jabatan')->autoIncrement();
             $table->char('nama_jabatan', 50)->default('');
         });
     }

@@ -11,11 +11,11 @@
                     <div class="form-group row" style="width:100%">
                         <label class="col-lg-2 col-form-label">NIK</label>
                         <div class="col">
-                            <input type="text" maxlength="40" class="form-control" name="nik" >
+                            <input type="number" minlength="6" maxlength="6" max="form-control" name="nik" >
                         </div>
                         <label class="col-lg-2 col-form-label">Email Karyawan</label>
                         <div class="col">
-                            <input type="text" maxlength="40" class="form-control" name="email_karyawan" >
+                            <input type="email" maxlength="40" class="form-control" name="email_karyawan" >
                         </div>
                     </div>
                     <div class="form-group row" style="width:100%">
@@ -25,7 +25,7 @@
                         </div>
                         <label class="col-lg-2 col-form-label">Password</label>
                         <div class="col">
-                            <input type="text" maxlength="40" class="form-control" name="password" >
+                            <input type="password" maxlength="40" class="form-control" name="password" >
                         </div>
                     </div>
                     <div class="form-group row" style="width:100%">
@@ -76,19 +76,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if(count($dataJabatan) > 0)
-                    @foreach ($dataJabatan as $j)
+                @if(count($dataKaryawan) > 0)
+                    @foreach ($dataKaryawan as $k)
                         <tr>
-                            <th scope="row">{{$j->nik}}</th>
-                            <td>{{$j->nama_karyawan}}</td>
-                            <td>{{$j->nomor_telepon}}</td>
-                            <td>{{$j->jabatan}}</td>
-                            <td>{{$j->email}}</td>
+                            <th scope="row">{{$k->nik}}</th>
+                            <td>{{$k->nama_karyawan}}</td>
+                            <td>{{$k->no_telepon}}</td>
+                            <td>
+                                {{
+                                    $k->jabatan->nama_jabatan
+                                }}
+                            </td>
+                            <td>{{$k->email_karyawan}}</td>
                             <td><a>Ubah</a></td>
                         </tr>
                     @endforeach
                 @else
-                    <tr><td colspan="6">Data Karyawan belum tersedia di sistem</td></tr>
+                    <tr><th colspan="6">Data Karyawan belum tersedia di sistem</th></tr>
                 @endif
                 </tbody>
             </table>

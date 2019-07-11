@@ -14,12 +14,12 @@ class CreateKaryawansTable extends Migration
     public function up()
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->integer('nik');
+            $table->unsignedMediumInteger('nik');
             $table->char('nama_karyawan', 50)->default('');
             $table->char('email_karyawan', 50)->default('');
             $table->char('password', 255)->default('');
             $table->char('no_telepon', 13)->default('');
-            $table->integer('kode_jabatan')->unsigned();
+            $table->unsignedTinyInteger('kode_jabatan');
             $table->foreign('kode_jabatan')->references('kode_jabatan')->on('jabatan')->onDelete('cascade');
             $table->primary('nik');
         });

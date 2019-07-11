@@ -14,13 +14,13 @@ class CreatePelanggansTable extends Migration
     public function up()
     {
         Schema::create('pelanggan', function (Blueprint $table) {
-            $table->increments('kode_pelanggan');
+            $table->unsignedMediumInteger('kode_pelanggan')->autoIncrement();
             $table->char('nama_pelanggan', 50)->default('');
             $table->char('email_pelanggan', 50)->default('');
-            $table->char('pawssword', 255)->default('');
+            $table->char('password', 255)->default('');
             $table->char('npwp', 15)->default('');
             $table->char('no_telepon', 13)->default('');
-            $table->integer('nik');
+            $table->unsignedMediumInteger('nik');
             $table->foreign('nik')->references('nik')->on('karyawan')->onDelete('cascade');
         });
     }

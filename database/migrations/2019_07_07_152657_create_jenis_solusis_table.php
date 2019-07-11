@@ -14,9 +14,9 @@ class CreateJenisSolusisTable extends Migration
     public function up()
     {
         Schema::create('jenis_solusi', function (Blueprint $table) {
-            $table->increments('kode_jenis_solusi');
+            $table->unsignedMediumInteger('kode_jenis_solusi')->autoIncrement();
             $table->char('jenis_solusi', 40)->default('');
-            $table->integer('kode_jenis_keluhan')->unsigned();
+            $table->unsignedTinyInteger('kode_jenis_keluhan');
             $table->foreign('kode_jenis_keluhan')->references('kode_jenis_keluhan')->on('jenis_keluhan')->onDelete('cascade');
         });
     }

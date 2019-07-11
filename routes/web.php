@@ -44,3 +44,5 @@ Route::resource('kontrak', 'KontrakController');
 Route::resource('detil-kontrak', 'DetilKontrakController');
 Route::resource('restitusi', 'RestitusiController');
 Route::resource('bukti-transfer', 'BuktiTransferController');
+Route::resource('karyawan', 'KaryawanController');
+Route::resource('pelanggan', 'PelangganController');

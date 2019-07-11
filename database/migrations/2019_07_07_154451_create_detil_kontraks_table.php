@@ -14,10 +14,10 @@ class CreateDetilKontraksTable extends Migration
     public function up()
     {
         Schema::create('detil_kontrak', function (Blueprint $table) {
-            $table->integer('kode_service_id')->unsigned()->nullable(false);
+            $table->char('kode_service_id', 19);
             $table->primary('kode_service_id');
-            $table->bigInteger('kode_layanan')->unsigned();
-            $table->char('kode_kontrak', 22);
+            $table->unsignedSmallInteger('kode_layanan');
+            $table->unsignedMediumInteger('kode_kontrak');
             $table->foreign('kode_layanan')->references('kode_layanan')->on('layanan')->onDelete('cascade');
             $table->foreign('kode_kontrak')->references('kode_kontrak')->on('kontrak')->onDelete('cascade');
             $table->char('alamat', 255)->default('');

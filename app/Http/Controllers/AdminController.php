@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Jabatan;
+use App\Layanan;
+use App\Karyawan;
 
 class AdminController extends Controller
 {
@@ -12,7 +14,8 @@ class AdminController extends Controller
         # code...
         $data = [
             "title" => 'Data Layanan',
-            "menu" => 'layanan'
+            "menu" => 'layanan',
+            "dataLayanan" => Layanan::all()
         ];
         return view('admin.layanan')->with($data);
     }
@@ -33,7 +36,9 @@ class AdminController extends Controller
         # code...
         $data = [
             "title" => 'Data Karyawan',
-            "menu" => 'karyawan'
+            "menu" => 'karyawan',
+            "dataKaryawan" => Karyawan::with('jabatan')->get(),
+            "dataJabatan" => Jabatan::all()
         ];
         return view('admin.karyawan')->with($data);
     }

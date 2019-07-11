@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Layanan;
 
 class LayananController extends Controller
 {
@@ -34,7 +35,12 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $l = new Layanan;
+        $l->nama_layanan = $request->input('nama_layanan');
+        $l->konfigurasi_layanan = $request->input('konfigurasi_layanan');
+        $l->harga = $request->input('harga_layanan');
+        $l->save();
+        return redirect('/admin/layanan');
     }
 
     /**

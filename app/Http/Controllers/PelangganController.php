@@ -3,9 +3,69 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pelanggan;
+use App\Kontrak;
+use App\DetilKontrak;
 
 class PelangganController extends Controller
 {
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {   
+        $tgl_mulai = date_create($request->input('tanggal_mulai'));
+        $tgl_selesai = date_create($request->input('tanggal_mulai'));
+        date_add($tgl_selesai, date_interval_create_from_date_string($request->input('jangka_waktu').' months'));
+        $tgl_mulai = $tgl_mulai->format('Y-m-d');
+        $tgl_selesai = $tgl_selesai->format('Y-m-d');
+
+        $p = new Pelanggan;
+        $p->nama_pelanggan = $request->input('nama_pelanggan');
+        $p->email_pelanggan = $request->input('email_pelanggan');
+        $p->password = \Hash::make($request->input('password'));
+        $p->no_telepon = $request->input('no_telepon');
+        $p->npwp = $request->input('npwp');
+        $p->nik = 910023;
+        $p->save();
+        $kode_pelanggan = $p->kode_pelanggan;
+
+        $k = new Kontrak;
+        $k->judul_kontrak = $request->input('judul_kontrak');
+        $k->tanggal_mulai_kontrak = $tgl_mulai;
+        $k->tanggal_selesai_kontrak = $tgl_selesai;
+        $k->level_garansi_layanan = $request->input('slg');
+        $k->kode_pelanggan = $kode_pelanggan;
+        $k->save();
+        $kode_kontrak = $k->kode_kontrak;
+
+        $arr = array();
+        $dl = new DetilKontrak;
+        $services = $request->input('layanan');
+        $addresses = $request->input('alamat');
+        $a = 0;
+        foreach($services as $kode_services) {
+            $arrtmp = array();
+            $arrtmp['kode_service_id'] = $kode_pelanggan."-".$kode_kontrak."-".$a;
+            // $dl->kode_service_id = $kode_pelanggan."-".$kode_kontrak."-".$a;
+            $arrtmp['kode_kontrak'] = $kode_kontrak;
+            // $dl->kode_kontrak = $kode_kontrak;
+            $tmp = explode("|",$kode_services);
+            $arrtmp['kode_layanan'] = $tmp[0];
+            // $dl->kode_layanan = $tmp[0];
+            $arrtmp['alamat'] = $addresses[$a];
+            // $dl->alamat = $addresses[$a];
+            array_push($arr, $arrtmp);
+            $a++;
+        }
+        DetilKontrak::insert($arr);
+        return redirect('/karyawan/aktivasi');
+    }
+
     public function Layanan()
     {
         # code...

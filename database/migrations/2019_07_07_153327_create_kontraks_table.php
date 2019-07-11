@@ -14,14 +14,13 @@ class CreateKontraksTable extends Migration
     public function up()
     {
         Schema::create('kontrak', function (Blueprint $table) {
-            $table->char('kode_kontrak', 22);
-            $table->primary('kode_kontrak');
+            $table->unsignedMediumInteger('kode_kontrak')->autoIncrement();
             $table->char('judul_kontrak', 150)->default('');
             $table->char('tanggal_mulai_kontrak', 24)->default('');
             $table->char('tanggal_selesai_kontrak', 24)->default('');
             $table->char('file_kontrak', 255)->default('');
             $table->integer('level_garansi_layanan');
-            $table->integer('kode_pelanggan')->unsigned();
+            $table->unsignedMediumInteger('kode_pelanggan');
             $table->foreign('kode_pelanggan')->references('kode_pelanggan')->on('pelanggan')->onDelete('cascade');
         });
     }

@@ -14,7 +14,7 @@ class CreateDetilSolusisTable extends Migration
     public function up()
     {
         Schema::create('detil_solusi', function (Blueprint $table) {
-            $table->increments('kode_ba_solusi');
+            $table->integer('kode_ba_solusi')->unsigned();
             $table->unsignedMediumInteger('kode_jenis_solusi');
             $table->char('keterangan', 255)->default('');
             $table->foreign('kode_ba_solusi')->references('kode_ba_solusi')->on('ba_solusi')->onDelete('cascade');

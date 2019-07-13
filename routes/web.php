@@ -23,7 +23,9 @@ Route::get('/admin/karyawan', 'AdminController@Karyawan');
 Route::get('/pelanggan/layanan', 'PelangganController@Layanan');
 Route::get('/pelanggan/tiket-gangguan', 'PelangganController@TiketGangguan');
 Route::get('/pelanggan/laporan/layanan', 'PelangganController@LaporanLayanan');
+Route::get('/pelanggan/download/layanan', 'PelangganController@DownloadLayanan');
 Route::get('/pelanggan/laporan/restitusi', 'PelangganController@LaporanRestitusi'); 
+Route::get('/pelanggan/download/restitusi', 'PelangganController@DownloadLayanan');
 
 Route::get('/karyawan/tiket', 'KaryawanController@TiketGangguan');
 Route::get('/karyawan/aktivasi', 'KaryawanController@AktivasiPelanggan');

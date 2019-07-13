@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JenisSolusi;
 
 class JenisSolusiController extends Controller
 {
@@ -34,7 +35,11 @@ class JenisSolusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $k = new JenisSolusi;
+        $k->jenis_solusi = $request->input('jenis_solusi');
+        $k->kode_jenis_keluhan = $request->input('id_jenis_keluhan');
+        $k->save();
+        return redirect('/karyawan/pemetaan-solusi');
     }
 
     /**
@@ -45,7 +50,7 @@ class JenisSolusiController extends Controller
      */
     public function show($id)
     {
-        //
+        return JenisSolusi::where('kode_jenis_keluhan', $id)->get();
     }
 
     /**

@@ -11,13 +11,14 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Ticket ID</label>
                         <div class="col-lg-6">
-                            <input type="text" readonly maxlength="40" class="form-control" name="id_ticket" >
+                        <input type="text" readonly value="{{count($dataTiket)+1}}" maxlength="40" class="form-control" name="id_ticket" >
                         </div>
                     </div>
                     <div class="form-group row">                    
                         <label class="col-lg-3 col-form-label">Service ID</label>
                         <div class="col-lg-6">
-                            <select class="form-control" name="service_id" >
+                            <select class="form-control" name="kode_service_id" >
+                                <option selected disabled hidden>Pilih Service ID</option>
                             @foreach ($dataDetilKontrak as $dk)
                                 <option value="{{$dk->kode_service_id}}">
                                     {{$dk->kode_service_id}}
@@ -30,17 +31,18 @@
                     <div class="form-group row">                    
                         <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
                         <div class="col-lg-6">
-                            <select class="form-control" name="id_jenis_keluhan">
-                            @foreach ($dataJenisKeluhan as $jk)
-                                <option value="{{$jk->kode_jenis_keluhan}}">{{$jk->jenis_keluhan}}</option>
-                            @endforeach
+                            <select class="form-control" name="kode_jenis_keluhan">
+                                <option selected disabled hidden>Pilih ID Jenis Keluhan</option>
+                                @foreach ($dataJenisKeluhan as $jk)
+                                    <option value="{{$jk->kode_jenis_keluhan}}">{{$jk->jenis_keluhan}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">                    
                         <label class="col-lg-3 col-form-label">Keluhan</label>
                         <div class="col-lg-6">
-                            <textarea maxlength="255" class="form-control"></textarea>
+                            <textarea name="keterangan_keluhan" maxlength="255" class="form-control"></textarea>
                         </div>
                     </div>
                     <input type="submit" class="btn btn-success float-right" value="Buat Tiket Gangguan">
@@ -96,23 +98,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if(count($dataTicket) > 0)
-                    @foreach ($dataTicket as $t)
-                    <tr>
+                @if(count($dataTiket) > 0)
+                    @foreach ($dataTiket as $t)
+                    <tr id="tiket-{{$t->kode_tiket}}">
                         <th scope="row">{{$t->kode_tiket}}</th>
                         <td>{{$t->kode_service_id}}</td>
-                        <td>{{$t->jenis_keluhan}}</td>
-                        <td>{{$t->open_time}}</td>
-                        <td>{{$t->ba_time}}</td>
-                        <td>{{$t->close_time}}</td>
-                        <td>{{$t->pic}}</td>
-                        <td><a>Open Tiket</a></td>
+                        <td>{{$t->jenis_keluhan->jenis_keluhan}}</td>
+                        <td>{{$t->tanggal_waktu_buat}}</td>
+                        <td>
+                            {{-- @if($t->ba_solusi->tanggal_ba_solusi)
+                                {{$t->ba_solusi->tanggal_ba_solusi}}
+                            @else
+                                Queued
+                            @endif --}}
+                            OGP
+                        </td>
+                        <td>
+                            OGP
+                            {{-- @if($t->ba_solusi->tanggal_ba_selesai)
+                                {{$t->ba_solusi->tanggal_ba_selesai}}
+                            @else
+                                Queued
+                            @endif --}}
+                        </td>
+                        <td>
+                            Adithya Visnu
+                        </td>
+                        <td><a href="#" onclick="close_tiket('tiket-{{$t->kode_tiket}}')">Close Tiket</a></td>
                     </tr>
                     @endforeach
                 @else
-                    <tr><td colspan="6">Data Tiket tidak tersedia di sistem</td></tr>
+                    <tr><td colspan="8">Data Tiket tidak tersedia di sistem</td></tr>
                 @endif
-                    <tr>
+                    {{-- <tr>
                         <th scope="row">IN1001929</th>
                         <td>442003992-1299101</td>
                         <td>Jaringan Tidak Stabil</td>
@@ -121,7 +139,7 @@
                         <td>20 April 2019 6.14 PM</td>
                         <td>Munadi</td>
                         <td><a>Open Tiket</a></td>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>

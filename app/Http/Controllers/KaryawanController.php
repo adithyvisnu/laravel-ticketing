@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Karyawan;
 use App\Layanan;
+use App\JenisKeluhan;
+use App\JenisSolusi;
+use App\Tiket;
 
 class KaryawanController extends Controller
 {
@@ -31,7 +34,8 @@ class KaryawanController extends Controller
     {
          $data = [
             "title" => "Data Tiket Gangguan",
-            "menu" => "tiket"
+            "menu" => "tiket",
+            "dataTiket" => Tiket::all()
         ];
         return view('karyawan.tiket')->with($data);
     }
@@ -56,7 +60,9 @@ class KaryawanController extends Controller
     public function PemetaanSolusi() {
         $data = [
             "title" => "Form Pemetaan Jenis Solusi dan Jenis Keluhan",
-            "menu" => "solusiKeluhan"
+            "menu" => "solusiKeluhan",
+            "dataJenisKeluhan" => JenisKeluhan::all(),
+            "dataJenisSolusi" => JenisSolusi::all()
         ];
         return view('karyawan.pemetaanSolusi')->with($data);
     }

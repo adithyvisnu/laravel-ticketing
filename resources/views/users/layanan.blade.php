@@ -17,7 +17,11 @@
                 <legend>Total Kontrak</legend>
                 <h5>5</h5>
                 <div class="border p-2">
-                    <a id="id_kontrak">KTel/2018/08/16/DES</a><br>
+                    @if(count($dataKontrak) > 0)
+                        @foreach ($dataKontrak as $k)
+                    <a id="id_kontrak">{{$k->judul_kontrak}}</a><br>
+                        @endforeach
+                    @endif
                 </div>
             </fieldset>
         </div>
@@ -44,12 +48,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Ubah</td>
-                        <td>Ubah</td>
-                    </tr>
+                    @if(count($dataKontrak) > 0)
+                        @foreach ($dataKontrak as $k)
+                            @foreach ($k->detil_kontrak as $layanan)
+                                <tr>
+                                    <th scope="row">{{$layanan->kode_service_id}}</th>
+                                    <td>{{$layanan->kode_layanan}}</td>
+                                    <td>{{$layanan->kode_kontrak}}</td>
+                                    <td>{{$layanan->alamat}}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    @else
+                        <tr><th>Belum ada langganan layanan</th></tr>
+                    @endif
                 </tbody>
             </table>
         </div>

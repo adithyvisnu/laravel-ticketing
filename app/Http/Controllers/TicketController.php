@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tiket;
 
 class TicketController extends Controller
 {
@@ -34,7 +35,17 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tgl_mulai = date_create()->format('Y-m-d H:i:s');
+        $t = new Tiket;
+        $t->kode_tiket = $request->input('kode_tiket');
+        $t->keterangan_keluhan = $request->input('keterangan_keluhan');
+        $t->kode_pelanggan = 1;
+        $t->kode_jenis_keluhan = $request->input('kode_jenis_keluhan');
+        $t->kode_service_id = $request->input('kode_service_id');
+        $t->tanggal_waktu_buat = $tgl_mulai;
+        $t->save();
+
+        return redirect()->back();
     }
 
     /**

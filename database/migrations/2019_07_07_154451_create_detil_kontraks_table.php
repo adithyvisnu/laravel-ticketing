@@ -14,7 +14,7 @@ class CreateDetilKontraksTable extends Migration
     public function up()
     {
         Schema::create('detil_kontrak', function (Blueprint $table) {
-            $table->char('kode_service_id', 19);
+            $table->string('kode_service_id', 19);
             $table->primary('kode_service_id');
             $table->unsignedSmallInteger('kode_layanan');
             $table->unsignedMediumInteger('kode_kontrak');

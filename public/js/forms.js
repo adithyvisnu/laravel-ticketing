@@ -63,3 +63,16 @@ function cek_data_layanan(){
         return
     }
 }
+
+function ba_solusi(id){
+    var kode_service_id = $("#tiket-"+id);
+    var kode_jenis_keluhan = $("#jenis-keluhan-"+id);
+    kode_service_id.find('td').each (function(e) {
+        console.log(e)
+    });
+}
+
+function add_detil_solusi(){
+    var kode_jenis_solusi = $('#layanan').val();
+    var keterangan_keluhan = $('#alamat').val();
+}

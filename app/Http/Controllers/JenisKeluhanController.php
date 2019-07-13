@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\JenisKeluhan;
 
 class JenisKeluhanController extends Controller
 {
@@ -34,7 +35,10 @@ class JenisKeluhanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $k = new JenisKeluhan;
+        $k->jenis_keluhan = $request->input('jenis_keluhan');
+        $k->save();
+        return redirect('/karyawan/pemetaan-solusi');
     }
 
     /**

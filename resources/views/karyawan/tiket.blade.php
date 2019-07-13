@@ -54,67 +54,7 @@
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
+                                        <tbody id="detil_solusi">
                                             <tr>
                                                 <th scope="row">Hardware</th>
                                                 <td>Restart Modem</td>
@@ -189,6 +129,38 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(count($dataTiket) > 0)
+                        @foreach ($dataTiket as $t)
+                        <tr id="tiket-{{$t->kode_tiket}}">
+                            <th scope="row">{{$t->kode_tiket}}</th>
+                            <td>{{$t->kode_service_id}}</td>
+                            <td>{{$t->jenis_keluhan->jenis_keluhan}}</td>
+                            <td>{{$t->tanggal_waktu_buat}}</td>
+                            <td>
+                                {{-- @if($t->ba_solusi->tanggal_ba_solusi)
+                                    {{$t->ba_solusi->tanggal_ba_solusi}}
+                                @else
+                                    Queued
+                                @endif --}}
+                                OGP
+                            </td>
+                            <td>
+                                OGP
+                                {{-- @if($t->ba_solusi->tanggal_ba_selesai)
+                                    {{$t->ba_solusi->tanggal_ba_selesai}}
+                                @else
+                                    Queued
+                                @endif --}}
+                            </td>
+                            <td>
+                                Adithya Visnu
+                            </td>
+                            <td><a href="#" onclick="close_tiket('tiket-{{$t->kode_tiket}}')">Close Tiket</a></td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr><td colspan="8">Data Tiket tidak tersedia di sistem</td></tr>
+                    @endif
                     <tr>
                         <th scope="row">IN1001929</th>
                         <td>442003992-1299101</td>

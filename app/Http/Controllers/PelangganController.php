@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Pelanggan;
 use App\Kontrak;
 use App\DetilKontrak;
+use App\JenisKeluhan;
+use App\Tiket;
+use PDF;
 
 class PelangganController extends Controller
 {
@@ -71,7 +74,8 @@ class PelangganController extends Controller
         # code...
         $data = [
             "title" => "Data Kontrak dan Layanan",
-            "menu" => "layanan"
+            "menu" => "layanan",
+            "dataKontrak" => Kontrak::with('detil_kontrak')->get()
         ];
         return view('users.layanan')->with($data);
     }
@@ -80,7 +84,10 @@ class PelangganController extends Controller
         # code...
         $data = [
             "title" => "Data Tiket Gangguan",
-            "menu" => "tiket"
+            "menu" => "tiket",
+            "dataDetilKontrak" => DetilKontrak::with('layanan')->get(),
+            "dataJenisKeluhan" => JenisKeluhan::all(),
+            "dataTiket" => Tiket::with('jenis_keluhan')
         ];
         return view('users.tiket')->with($data);
     }
@@ -101,5 +108,17 @@ class PelangganController extends Controller
             "menu" => "lapRestitusi"
         ];
         return view('users.lapRestitusi')->with($data);
+    }
+    public function DownloadLayanan(){
+        $data = ['title' => 'Welcome to HDTuto.com'];
+        $pdf = PDF::loadView('myPDF', $data);
+  
+        return $pdf->download('itsolutionstuff.pdf');
+    }
+    public function DownloadRestitusi(){
+        $data = ['title' => 'Welcome to HDTuto.com'];
+        $pdf = PDF::loadView('myPDF', $data);
+  
+        return $pdf->download('itsolutionstuff.pdf');
     }
 }

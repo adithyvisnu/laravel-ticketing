@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\BASolusi;
+use App\DetilSolusi;
+use App\Tiket;
 
 class BASolusiController extends Controller
 {
@@ -34,7 +37,33 @@ class BASolusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $b = new BASolusi;
+        $b->kode_tiket = $request->input('kode_tiket');
+        $b->tanggal_ba_solusi = date_create()->format('Y-m-d H:i:s');
+        $b->save();
+        $kode_ba_solusi = $b->kode_ba_solusi;
+
+        $ds = new DetilSolusi;
+        $ds->kode_ba_solusi = $kode_ba_solusi;
+        $kode_jenis_solusi = $request->input('kode_jenis_solusi');
+        $keterangan_solusi = $request->input('keterangan_solusi');
+        $arr = array();
+        $a = 0;
+        foreach ($kode_jenis_solusi as $detil_solusi) {
+            $arrtmp = array();
+            $arrtmp['kode_ba_solusi'] = $kode_ba_solusi;
+            $arrtmp['kode_jenis_solusi'] = $detil_solusi;
+            $arrtmp['keterangan'] = $keterangan_solusi[$a];
+            array_push($arr, $arrtmp);
+            $a++;
+        }
+        DetilSolusi::insert($arr);
+
+        $t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
+        $t->nik = 910023;
+        $t->save();
+
+        return redirect()->back();
     }
 
     /**

@@ -56,7 +56,7 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        //
+        return Tiket::with('detil_kontrak','jenis_keluhan','jenis_solusi')->first();
     }
 
     /**

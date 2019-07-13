@@ -45,6 +45,7 @@
                         <th scope="col">Nama Layanan</th>
                         <th scope="col">Konfigurasi</th>
                         <th scope="col">Harga</th>
+                        <th scope="col">Alamat Pemasangan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,7 @@
                                     <th scope="row">{{$layanan->kode_service_id}}</th>
                                     <td>{{$layanan->kode_layanan}}</td>
                                     <td>{{$layanan->kode_kontrak}}</td>
+                                    <td>{{$layanan->kode_layanan}}</td>
                                     <td>{{$layanan->alamat}}</td>
                                 </tr>
                             @endforeach

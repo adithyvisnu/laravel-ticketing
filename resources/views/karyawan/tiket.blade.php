@@ -4,45 +4,47 @@
     <h1 class="display-4">{{$title}}</h1>
     <div class="row">
         <div class="col">
-            <fieldset class="border p-1">
+            <fieldset class="border p-3">
                 <legend>Buat BA Solusi</legend>
-                <form action="">
+                <form action="/ba-solusi" method="POST">
+                    {{csrf_field()}}
                     <div class="form-group row">
                         <div class="col">
                             <div class="row">
                                 <label class="col-lg-4 col-form-label">Ticket ID</label>
-                                <label class="col-lg-8 col-form-label" id="ticket_id">IN1001929</label>
-                                <input type="hidden" readonly maxlength="40" class="form-control" name="ticket_id" >
+                                <label class="col-lg-8 col-form-label" id="kode_tiket_solusi"><i> Silakan pilih tiket</i></label>
+                                <input type="text" hidden readonly maxlength="40" class="form-control" name="kode_tiket" >
                             </div>
                             <div class="row">
                                 <label class="col-lg-4 col-form-label">Jenis Keluhan</label>
-                                <label class="col-lg-8 col-form-label" id="jenis_keluhan">Jaringan Tidak Stabil</label>
+                                <label class="col-lg-8 col-form-label" id="jenis_keluhan_solusi"><i> Silakan pilih tiket</i></label>
                             </div>
                             <div class="row">
                                 <label class="col-lg-4 col-form-label">Keluhan</label>
-                                <label class="col-lg-8 col-form-label" id="keterangan_keluhan">Sering kali down dalam akses yang banyak</label>
+                                <label class="col-lg-8 col-form-label" id="keterangan_keluhan_solusi"><i> Silakan pilih tiket</i></label>
                             </div>
                             <div class="row">                 
                                 <label class="col-lg-4 col-form-label">Jenis Solusi</label>
                                 <div class="col-lg-8">
-                                    <select class="form-control" name="id_jenis_solusi">
-                                        <option value="1">Hardware</option>
-                                        <option value="2">Cek Backend</option>
-                                        <option value="3">Cek Bandwidth</option>
+                                    <select class="form-control" name="kode_jenis_solusi" id="list_jenis_solusi">
+                                        <option value="" disabled hidden>Pilih Jenis Solusi</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label class="col-form-label">Keluhan</label><br>
-                                    <textarea class="form-control" maxlength="255" class="form-control"></textarea>
+                                    <textarea class="form-control" maxlength="255" class="form-control" id="keterangan_solusi"></textarea>
                                 </div>
                             </div>
+                        </div>
+                        <div id="list_solusi">
+                            <input type="number" hidden readonly id="count" value="0">
                         </div>
                         <div class="col">
                             <div class="row">
                                 <label class="col-lg-4 col-form-label">Service ID</label>
-                                <label class="col-lg-8 col-form-label" id="service_id">442003992-1299101</label>
+                                <label class="col-lg-8 col-form-label" id="service_id_solusi"><i> Silakan pilih tiket</i></label>
                             </div>
                             <div class="row">
                                 <div class="col table-responsive" style="position: relative;height: 200px;overflow-y: auto;width:100%;">
@@ -55,22 +57,16 @@
                                             </tr>
                                         </thead>
                                         <tbody id="detil_solusi">
-                                            <tr>
-                                                <th scope="row">Hardware</th>
-                                                <td>Restart Modem</td>
-                                                <td><a href="">Hapus</a></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="row justify-content-between">
                                 <div class="col-3">
-                                    <a class="btn btn-info"> Add</a>
-                                    
+                                    <a class="btn btn-info" onclick="add_detil_solusi()"> Add</a>
                                 </div>
                                 <div class="col text-right">
-                                    <input type="submit" class="btn btn-success" value="Submit BA Solusi">
+                                    <input type="submit" class="btn btn-success" onclick="cek_solusi()" value="Submit BA Solusi">
                                 </div>
                             </div>
                         </div>
@@ -81,21 +77,22 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Close Tiket Gangguan</legend>
-                    <form action="">
+                    <form action="/ba-selesai" method="POST" enctype="multipart/form-data">
                         
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Tiket ID</label>
-                            <label class="col-lg-3 col-form-label">IN1001929</label>
+                            <label class="col-lg-3 col-form-label" id="kode_tiket_close"><i> Silakan pilih tiket</i></label>
+                            <input type="text" name="kode_tiket" hidden readonly>
                             <label class="col-lg-2 col-form-label">Service ID</label>
-                            <label class="col col-form-label">442003992-1299101</label>
+                            <label class="col col-form-label" id="service_id_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
-                            <label class="col col-form-label">Jaringan Tidak Stabil</label>
+                            <label class="col col-form-label" id="jenis_keluhan_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Keluhan</label>
-                            <label class="col col-form-label">Sering kali down dalam akses yang banyak</label>
+                            <label class="col col-form-label" id="keterangan_keluhan_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <div class="col">
@@ -137,25 +134,31 @@
                             <td>{{$t->jenis_keluhan->jenis_keluhan}}</td>
                             <td>{{$t->tanggal_waktu_buat}}</td>
                             <td>
-                                {{-- @if($t->ba_solusi->tanggal_ba_solusi)
+                                @if(!is_null($t->ba_solusi))
                                     {{$t->ba_solusi->tanggal_ba_solusi}}
                                 @else
-                                    Queued
-                                @endif --}}
-                                OGP
+                                    -
+                                @endif
                             </td>
                             <td>
-                                OGP
-                                {{-- @if($t->ba_solusi->tanggal_ba_selesai)
+                                @if(!is_null($t->ba_selesai))
                                     {{$t->ba_solusi->tanggal_ba_selesai}}
                                 @else
-                                    Queued
-                                @endif --}}
+                                    -
+                                @endif
                             </td>
                             <td>
                                 Adithya Visnu
                             </td>
-                            <td><a href="#" onclick="close_tiket('tiket-{{$t->kode_tiket}}')">Close Tiket</a></td>
+                            <td>
+                                @if(is_null($t->ba_solusi))
+                                    <a href="#" onclick="get_tiket_ba_solusi({{$t->kode_tiket}})">Buat BA Solusi</a>
+                                @elseif(is_null($t->ba_selesai))
+                                    <a href="#" onclick="close_tiket({{$t->kode_tiket}})">Close Tiket</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     @else

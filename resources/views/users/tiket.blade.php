@@ -103,7 +103,7 @@
                     <tr id="tiket-{{$t->kode_tiket}}">
                         <th scope="row">{{$t->kode_tiket}}</th>
                         <td>{{$t->kode_service_id}}</td>
-                        <td>{{$t->jenis_keluhan->jenis_keluhan}}</td>
+                        <td width="30%">{{$t->jenis_keluhan->jenis_keluhan}} - {{$t->keterangan_keluhan}}</td>
                         <td>{{$t->tanggal_waktu_buat}}</td>
                         <td>
                             {{-- @if($t->ba_solusi->tanggal_ba_solusi)

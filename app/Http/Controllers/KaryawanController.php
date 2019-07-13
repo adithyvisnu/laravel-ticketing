@@ -35,7 +35,7 @@ class KaryawanController extends Controller
          $data = [
             "title" => "Data Tiket Gangguan",
             "menu" => "tiket",
-            "dataTiket" => Tiket::all()
+            "dataTiket" => Tiket::with('jenis_keluhan')->get()
         ];
         return view('karyawan.tiket')->with($data);
     }
@@ -62,7 +62,7 @@ class KaryawanController extends Controller
             "title" => "Form Pemetaan Jenis Solusi dan Jenis Keluhan",
             "menu" => "solusiKeluhan",
             "dataJenisKeluhan" => JenisKeluhan::all(),
-            "dataJenisSolusi" => JenisSolusi::all()
+            "dataJenisSolusi" => JenisSolusi::with("jenis_keluhan")->get()
         ];
         return view('karyawan.pemetaanSolusi')->with($data);
     }

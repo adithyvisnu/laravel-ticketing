@@ -56,7 +56,7 @@
                             <input type="text" maxlength="40" class="form-control" name="jenis_solusi" >
                         </div>
                     </div>
-                    <div class="form-group row">                    
+                    <div class="form-group row">
                         <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
                         <div class="col-lg-6">
                             <select class="form-control" name="id_jenis_keluhan">
@@ -87,7 +87,7 @@
                                     <tr>
                                         <th scope="row">{{$js->kode_jenis_solusi}}</th>
                                         <td>{{$js->jenis_solusi}}</td>
-                                        <td>{{$js->kode_jenis_keluhan}}</td>
+                                        <td>{{$js->kode_jenis_keluhan}} - {{$js->jenis_keluhan->jenis_keluhan}}</td>
                                         <td><a href="">Hapus</a></td>
                                     </tr>
                                 @endforeach

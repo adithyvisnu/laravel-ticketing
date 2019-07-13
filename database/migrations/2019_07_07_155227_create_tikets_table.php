@@ -19,7 +19,7 @@ class CreateTiketsTable extends Migration
             $table->char('tanggal_waktu_selesai', 24)->nullable();
             $table->char('keterangan_keluhan', 255);
             $table->unsignedMediumInteger('kode_pelanggan');
-            $table->unsignedMediumInteger('nik');
+            $table->unsignedMediumInteger('nik')->nullable();
             $table->unsignedTinyInteger('kode_jenis_keluhan');
             $table->string('kode_service_id', 19);
             $table->foreign('nik')->references('nik')->on('karyawan')->onDelete('cascade');

@@ -78,7 +78,7 @@
             <fieldset class="border p-3">
                 <legend>Close Tiket Gangguan</legend>
                     <form action="/ba-selesai" method="POST" enctype="multipart/form-data">
-                        
+                        @csrf
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Tiket ID</label>
                             <label class="col-lg-3 col-form-label" id="kode_tiket_close"><i> Silakan pilih tiket</i></label>
@@ -97,11 +97,11 @@
                         <div class="form-group row">
                             <div class="col">
                                 <label>Upload Bukti Gangguan Selesai</label>
-                                <img src="" alt="Image Upload Preview" style="min-width:150px; min-height:150px; border:1px solid #eee" id="preview">
+                                <img src="" required alt="Image Upload Preview" style="min-width:150px; min-height:150px; border:1px solid #eee" id="preview">
                                 <input type="file" name="bukti_close" alt="Upload Bukti Close Tiket" onchange="showThumbnail(this);">
                             </div>
                             <div class="col" style="align-text-bottom">
-                                <input type="submit" class="btn btn-success float-right" value="Close Tiket Gangguan">
+                                <input type="submit" class="btn btn-success float-right" onclick="cek_selesai()" value="Close Tiket Gangguan">
                             </div>
                         </div>        
                         
@@ -142,7 +142,7 @@
                             </td>
                             <td>
                                 @if(!is_null($t->ba_selesai))
-                                    {{$t->ba_solusi->tanggal_ba_selesai}}
+                                    {{$t->ba_selesai->tanggal_ba_selesai}}
                                 @else
                                     -
                                 @endif
@@ -154,7 +154,7 @@
                                 @if(is_null($t->ba_solusi))
                                     <a href="#" onclick="get_tiket_ba_solusi({{$t->kode_tiket}})">Buat BA Solusi</a>
                                 @elseif(is_null($t->ba_selesai))
-                                    <a href="#" onclick="close_tiket({{$t->kode_tiket}})">Close Tiket</a>
+                                    <a href="#" onclick="get_tiket_ba_selesai({{$t->kode_tiket}})">Close Tiket</a>
                                 @else
                                     -
                                 @endif
@@ -164,26 +164,6 @@
                     @else
                         <tr><td colspan="8">Data Tiket tidak tersedia di sistem</td></tr>
                     @endif
-                    <tr>
-                        <th scope="row">IN1001929</th>
-                        <td>442003992-1299101</td>
-                        <td>Jaringan Tidak Stabil</td>
-                        <td>20 April 2019 6.04 PM</td>
-                        <td>20 April 2019 6.12 PM</td>
-                        <td>20 April 2019 6.14 PM</td>
-                        <td>Munadi</td>
-                        <td><a>Buat BA Solusi</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">IN1001921</th>
-                        <td>442003992-213</td>
-                        <td>Jaringan Mati</td>
-                        <td>20 April 2019 6.04 PM</td>
-                        <td>20 April 2019 6.14 PM</td>
-                        <td>20 April 2019 6.19 PM</td>
-                        <td>Karyo</td>
-                        <td><a>Close Tiket</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>

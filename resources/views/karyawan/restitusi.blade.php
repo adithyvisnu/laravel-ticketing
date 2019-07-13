@@ -102,26 +102,69 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">442003992-1299101</th>
-                        <td>VPN IP</td>
-                        <td>5 MB download- 10 MN upload</td>
-                        <td>Jln Cihanjuang Gang Bp sai no 19 b</td>
-                        <td>99%</td>
-                        <td>98.7%</td>
-                        <td>0.3%</td>
-                        <td><a>Rp {{number_format(13100)}}</a></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">442003992-1299133</th>
-                        <td>Astinet</td>
-                        <td>5 MB download- 10 MN upload</td>
-                        <td>Jln Cihanjuang Gang Bp sai no 19 b</td>
-                        <td>99%</td>
-                        <td>98%</td>
-                        <td>1%</td>
-                        <td><a>Rp {{number_format(26600)}}</a></td>
-                    </tr>
+                    @php
+                        // get total sec in one month
+                        // thanks to https://stackoverflow.com/questions/7651263/subtract-1-day-with-php
+                        $create = date_create(date('Y')."-".date('m')."-"."01");
+                        date_add($create,date_interval_create_from_date_string("1 month"));
+                        $total_day = date('d',(strtotime ( '-1 day' , strtotime ( $create->format('Y-m-d') ) ) ));
+                        $total_sec = $total_day * 60 * 60 * 24;
+                    @endphp
+                    @if(count($dataDetilKontrak) > 0)
+                        @foreach ($dataDetilKontrak as $k)
+                            <tr>
+                                <th scope="row">{{$k->kode_service_id}}</th>
+                                <td>{{$k->layanan->nama_layanan}}</td>
+                                <td width="20%">{{$k->layanan->konfigurasi_layanan}}</td>
+                                <td>{{$k->alamat}}</td>
+                                <td>
+                                    {{$k->kontrak->level_garansi_layanan}}% 
+                                </td>
+                                <td>
+                                    @php
+                                        $total_time = 0;
+                                    @endphp
+                                    @foreach ($k->tiket as $t)
+                                        @php
+                                            // thanks to https://stackoverflow.com/questions/3176609/calculate-total-seconds-in-php-dateinterval
+                                            $date_awal = date_create($t->tanggal_waktu_buat);
+                                            $date_akhir = date_create($t->tanggal_waktu_selesai);
+                                            $total_time = $date_akhir->getTimestamp() - $date_awal->getTimestamp();
+                                        @endphp
+                                    @endforeach
+                                    @php
+                                        $percentage = (($total_sec - $total_time) / $total_sec) * 100;
+                                    @endphp
+                                    {{ number_format((float)$percentage, 2, '.', '') }}%
+                                </td>
+                                <td>
+                                    @php
+                                        $selisih = $k->kontrak->level_garansi_layanan - $percentage;
+                                        if ($selisih < 0) {
+                                            echo "0%";
+                                        } else {
+                                            echo number_format((float)abs($selisih), 2, '.', '')."%";
+                                            $selisih = 100 - $selisih;
+                                            $selisih = number_format((float)abs($selisih), 2, '.', '');
+                                        }
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                    if ($selisih < 0) {
+                                        echo '-';
+                                    } else {
+                                        $selisih = 100 - $selisih;
+                                        $restitusi = ($selisih/100) * $k->layanan->harga;
+                                        echo "Rp ".number_format($restitusi);
+                                    }
+                                    @endphp
+                                </td>  
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr><th>Belum ada langganan layanan</th></tr>
+                    @endif
                 </tbody>
             </table>
         </div>

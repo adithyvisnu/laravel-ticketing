@@ -123,7 +123,6 @@ function cek_solusi(){
             e.preventDefault();
         });
     }
-    // alert(total_solusi)
     return confirm('Yakin submit Berita Acara Solusi?', function(result) {
         if(result) {
                 form.submit();
@@ -132,7 +131,7 @@ function cek_solusi(){
     );
 }
 
-function close_tiket(id) {
+function get_tiket_ba_selesai(id) {
     $.ajax({
         type:'GET',
         url:'/ticket/'+id,
@@ -145,4 +144,19 @@ function close_tiket(id) {
             $('input[name=kode_tiket]').val(data.kode_tiket);
         }
     });
+}
+
+function cek_selesai(){
+    var kode_tiket = $('input[name=kode_tiket]').val();
+    if(kode_tiket === ''){
+        $("form").submit(function(e){
+            e.preventDefault();
+        });
+    }
+    return confirm('Yakin submit Berita Acara Selesai?', function(result) {
+        if(result) {
+                form.submit();
+            }
+        }
+    );
 }

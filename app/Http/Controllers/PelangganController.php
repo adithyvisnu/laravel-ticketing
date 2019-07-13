@@ -97,7 +97,7 @@ class PelangganController extends Controller
         $data = [
             "title" => "Laporan Ketersediaan Layanan Bulanan",
             "menu" => "lapLayanan",
-            "dataKontrak" => Kontrak::with('detil_kontrak')->get()
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
         ];
         return view('users.lapLayanan')->with($data);
     }
@@ -106,7 +106,8 @@ class PelangganController extends Controller
         # code...
         $data = [
             "title" => "Laporan Perhitungan dan Bukti Transfer Restitusi",
-            "menu" => "lapRestitusi"
+            "menu" => "lapRestitusi",
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
         ];
         return view('users.lapRestitusi')->with($data);
     }

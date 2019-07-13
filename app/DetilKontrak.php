@@ -16,4 +16,7 @@ class DetilKontrak extends Model
     public function layanan(){
         return $this->hasOne('App\Layanan', 'kode_layanan', 'kode_layanan');
     }
+    public function tiket(){
+        return $this->hasMany('App\Tiket', 'kode_service_id', 'kode_service_id');
+    }
 }

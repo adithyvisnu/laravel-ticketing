@@ -8,6 +8,7 @@ use App\Layanan;
 use App\JenisKeluhan;
 use App\JenisSolusi;
 use App\Tiket;
+use App\DetilKontrak;
 
 class KaryawanController extends Controller
 {
@@ -52,7 +53,8 @@ class KaryawanController extends Controller
     public function PembayaranRestitusi() {
         $data = [
             "title" => "Form Bukti Transfer Restitusi",
-            "menu" => "bayarRestitusi"
+            "menu" => "bayarRestitusi",
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
         ];
         return view('karyawan.restitusi')->with($data);
     }

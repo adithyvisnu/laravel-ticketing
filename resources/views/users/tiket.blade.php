@@ -52,26 +52,27 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Close Tiket Gangguan</legend>
-                    <form action="/ba-selesai" method="POST">
-                        {{ csrf_field() }}
+                    <form action="/ba-selesai" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Tiket ID</label>
-                            <label class="col-lg-3 col-form-label">IN1001929</label>
+                            <label class="col-lg-3 col-form-label" id="kode_tiket_close"><i> Silakan pilih tiket</i></label>
+                            <input type="text" name="kode_tiket" hidden readonly>
                             <label class="col-lg-2 col-form-label">Service ID</label>
-                            <label class="col col-form-label">442003992-1299101</label>
+                            <label class="col col-form-label" id="service_id_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Jenis Keluhan</label>
-                            <label class="col col-form-label">Jaringan Tidak Stabil</label>
+                            <label class="col col-form-label" id="jenis_keluhan_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">Keluhan</label>
-                            <label class="col col-form-label">Sering kali down dalam akses yang banyak</label>
+                            <label class="col col-form-label" id="keterangan_keluhan_close"><i> Silakan pilih tiket</i></label>
                         </div>
                         <div class="form-group row">
                             <div class="col">
                                 <img src="" alt="Image Upload Preview" style="min-width:150px; min-height:150px; border:1px solid #eee" id="preview">
-                                <input type="file" name="bukti_close" alt="Upload Bukti Close Tiket" onchange="showThumbnail(this);">
+                                <input type="file" name="bukti_close" accept="image/x-png,image/gif,image/jpeg" alt="Upload Bukti Close Tiket" onchange="showThumbnail(this);">
                             </div>
                             <div class="col" style="vertical-align:bottom">
                                     <input type="submit" class="btn btn-success float-right" value="Close Tiket Gangguan">
@@ -98,48 +99,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if(count($dataTiket) > 0)
-                    @foreach ($dataTiket as $t)
-                    <tr id="tiket-{{$t->kode_tiket}}">
-                        <th scope="row">{{$t->kode_tiket}}</th>
-                        <td>{{$t->kode_service_id}}</td>
-                        <td width="30%">{{$t->jenis_keluhan->jenis_keluhan}} - {{$t->keterangan_keluhan}}</td>
-                        <td>{{$t->tanggal_waktu_buat}}</td>
-                        <td>
-                            {{-- @if($t->ba_solusi->tanggal_ba_solusi)
-                                {{$t->ba_solusi->tanggal_ba_solusi}}
-                            @else
-                                Queued
-                            @endif --}}
-                            OGP
-                        </td>
-                        <td>
-                            OGP
-                            {{-- @if($t->ba_solusi->tanggal_ba_selesai)
-                                {{$t->ba_solusi->tanggal_ba_selesai}}
-                            @else
-                                Queued
-                            @endif --}}
-                        </td>
-                        <td>
-                            Adithya Visnu
-                        </td>
-                        <td><a href="#" onclick="close_tiket('tiket-{{$t->kode_tiket}}')">Close Tiket</a></td>
-                    </tr>
-                    @endforeach
-                @else
-                    <tr><td colspan="8">Data Tiket tidak tersedia di sistem</td></tr>
-                @endif
-                    {{-- <tr>
-                        <th scope="row">IN1001929</th>
-                        <td>442003992-1299101</td>
-                        <td>Jaringan Tidak Stabil</td>
-                        <td>20 April 2019 6.04 PM</td>
-                        <td>20 April 2019 6.12 PM</td>
-                        <td>20 April 2019 6.14 PM</td>
-                        <td>Munadi</td>
-                        <td><a>Open Tiket</a></td>
-                    </tr> --}}
+                    @if(count($dataTiket) > 0)
+                        @foreach ($dataTiket as $t)
+                        <tr id="tiket-{{$t->kode_tiket}}">
+                            <th scope="row">{{$t->kode_tiket}}</th>
+                            <td>{{$t->kode_service_id}}</td>
+                            <td>{{$t->jenis_keluhan->jenis_keluhan}}</td>
+                            <td>{{$t->tanggal_waktu_buat}}</td>
+                            <td>
+                                @if(!is_null($t->ba_solusi))
+                                    {{$t->ba_solusi->tanggal_ba_solusi}}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                @if(!is_null($t->ba_selesai))
+                                    {{$t->ba_selesai->tanggal_ba_selesai}}
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>
+                                Adithya Visnu
+                            </td>
+                            <td>
+                                @if(is_null($t->ba_selesai))
+                                    <a href="#" onclick="get_tiket_ba_selesai({{$t->kode_tiket}})">Close Tiket</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr><td colspan="8">Data Tiket tidak tersedia di sistem</td></tr>
+                    @endif
                 </tbody>
             </table>
         </div>

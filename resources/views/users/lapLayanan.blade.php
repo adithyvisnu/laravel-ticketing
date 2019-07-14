@@ -80,7 +80,7 @@
                                         if($seconds != 0) {
                                             echo "$seconds Detik";
                                         }
-                                        if($hours == 0 || $minutes == 0 || $seconds == 0) {
+                                        if($hours == 0 && $minutes == 0 && $seconds == 0) {
                                             echo "-";
                                         }
                                     @endphp
@@ -102,6 +102,6 @@
     </div>
     <div class="row">
         <div class="col">Menampilkan Periode: Januari 2019</div>
-        <div class="col text-right"><button class="btn btn-success">Download</button></div>
+        <div class="col text-right"><a target="_blank" href="/pelanggan/download/layanan" class="btn btn-success">Download</a></div>
     </div>
 @endsection

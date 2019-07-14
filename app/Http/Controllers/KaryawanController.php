@@ -9,6 +9,7 @@ use App\JenisKeluhan;
 use App\JenisSolusi;
 use App\Tiket;
 use App\DetilKontrak;
+use PDF;
 
 class KaryawanController extends Controller
 {
@@ -83,5 +84,26 @@ class KaryawanController extends Controller
            "menu" => "lapRestitusi"
        ];
        return view('karyawan.lapResitusi')->with($data);
+    }
+
+    public function DownloadTiket(){
+        $data = [
+            "title" => "Laporan Ketersediaan Layanan Bulanan",
+            "menu" => "lapLayanan",
+            "dataTiket" => Tiket::with('jenis_keluhan')->get()
+        ];
+        // return view('download.layanan')->with($data);
+        $pdf = PDF::loadView('download.tiket', $data);
+        return $pdf->download('tiket-'.date('Ym').'.pdf');
+    }
+
+    public function DownloadRestitusi(){
+        $data = [
+            "title" => "Laporan Perhitungan dan Bukti Transfer Restitusi",
+            "menu" => "lapRestitusi",
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
+        ];
+        $pdf = PDF::loadView('download.restitusi', $data);
+        return $pdf->download('Restitusi-'.date('Ym').'.pdf');
     }
 }

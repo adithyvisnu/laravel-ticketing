@@ -43,6 +43,17 @@ class PelangganController extends Controller
         $k->tanggal_selesai_kontrak = $tgl_selesai;
         $k->level_garansi_layanan = $request->input('slg');
         $k->kode_pelanggan = $kode_pelanggan;
+
+        if($request->hasFile('file')){
+            $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'-'.$kode_kontrak.'-'.time().$extension;
+            $path = $request->file('file')->storeAs('public/kontrak', $fileNameToStore);
+        } else {
+            $fileNameToStore = '';
+        }
+
         $k->save();
         $kode_kontrak = $k->kode_kontrak;
 
@@ -111,16 +122,25 @@ class PelangganController extends Controller
         ];
         return view('users.lapRestitusi')->with($data);
     }
+
     public function DownloadLayanan(){
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('myPDF', $data);
-  
-        return $pdf->download('itsolutionstuff.pdf');
+        $data = [
+            "title" => "Laporan Ketersediaan Layanan Bulanan",
+            "menu" => "lapLayanan",
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
+        ];
+        // return view('download.layanan')->with($data);
+        $pdf = PDF::loadView('download.layanan', $data);
+        return $pdf->download('SLG-'.date('Ym').'.pdf');
     }
+
     public function DownloadRestitusi(){
-        $data = ['title' => 'Welcome to HDTuto.com'];
-        $pdf = PDF::loadView('myPDF', $data);
-  
-        return $pdf->download('itsolutionstuff.pdf');
+        $data = [
+            "title" => "Laporan Perhitungan dan Bukti Transfer Restitusi",
+            "menu" => "lapRestitusi",
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
+        ];
+        $pdf = PDF::loadView('download.restitusi', $data);
+        return $pdf->download('Restitusi-'.date('Ym').'.pdf');
     }
 }

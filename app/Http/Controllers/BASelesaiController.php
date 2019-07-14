@@ -41,10 +41,21 @@ class BASelesaiController extends Controller
         $b->kode_tiket = $request->input('kode_tiket');
         $b->tanggal_ba_selesai = $date;
         $b->selesai_oleh = "Gani Amri";
-        $b->bukti_ba_selesai = "";
+        
+        if($request->hasFile('bukti_close')){
+            $filenameWithExt = $request->file('bukti_close')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('bukti_close')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'-'.$request->input('kode_tiket').'-'.time().$extension;
+            $path = $request->file('bukti_close')->storeAs('public/bukti_close', $fileNameToStore);
+        } else {
+            $fileNameToStore = '';
+        }
+
+        $b->bukti_ba_selesai = $fileNameToStore;
         $b->save();
 
-        $t->$t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
+        $t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
         $t->tanggal_waktu_selesai = $date;
         $t->save();
 

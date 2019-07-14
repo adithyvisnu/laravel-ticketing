@@ -18,7 +18,7 @@
                             <input type="date" class="form-control" name="tanggal_selesai" >
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-success float-right" value="Download">
+                    <a href="/karyawan/download/tiket" class="btn btn-success float-right" target="_blank">Download</a>
                 </form>
             </fieldset>
         </div>

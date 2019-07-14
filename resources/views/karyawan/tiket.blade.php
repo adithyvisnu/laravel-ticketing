@@ -98,7 +98,7 @@
                             <div class="col">
                                 <label>Upload Bukti Gangguan Selesai</label>
                                 <img src="" required alt="Image Upload Preview" style="min-width:150px; min-height:150px; border:1px solid #eee" id="preview">
-                                <input type="file" name="bukti_close" alt="Upload Bukti Close Tiket" onchange="showThumbnail(this);">
+                                <input type="file" name="bukti_close" accept="image/x-png,image/gif,image/jpeg" alt="Upload Bukti Close Tiket" onchange="showThumbnail(this);">
                             </div>
                             <div class="col" style="align-text-bottom">
                                 <input type="submit" class="btn btn-success float-right" onclick="cek_selesai()" value="Close Tiket Gangguan">

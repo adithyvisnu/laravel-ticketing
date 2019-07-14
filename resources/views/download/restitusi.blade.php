@@ -1,45 +1,54 @@
-@extends('users.app')
-
-@section('content')
-    <h1 class="display-4">{{$title}}</h1>
-    <div class="row">
-        <div class="col-8">
-            <form class="form-inline">
-                <div class="form-group mx-sm-3 mb-2">
-                    <select class="form-control" name="periode">
-                        <option value="">Periode</option>
-                        <option value="201902">Februari 2019</option>
-                        <option value="201901">Januari 2019</option>
-                    </select>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <select class="form-control" name="periode">
-                        <option value="">Judul Kontrak</option>
-                        <option value="201902">KTel/2018/9/2001</option>
-                        <option value="201901">Januari 2019</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-info mb-2">Pilih</button>
-            </form>    
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table id="data-table" class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Service ID</th>
-                        <th scope="col">Nama Layanan</th>
-                        <th scope="col">Konfigurasi</th>
-                        <th scope="col">Alamat</th>
-                        <th scope="col">SLG</th>
-                        <th scope="col">Aktual Ketersediaan Layanan</th>
-                        <th scope="col">Selisih</th>
-                        <th scope="col">Jumlah Kompensasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        @php
+<?php
+    /*Just for your server-side code*/
+    header('Content-Type: text/html; charset=ISO-8859-1');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ticketing Helpdesk - V1.0.0</title>
+</head>
+<body style="font-size:10pt">
+	<div>
+		<div>logo</div>
+		<div>PT. Telkom Indonesia <br> <br> Gedung Menara Multimedia, Jl. Kebon Sirih no <br>10-12, Jakarta Pusat, DKI Jakarta. <br>Kode Pos 10110</div>
+	</div>
+	<br><hr>
+	<div>
+		<div class="col text-center" style="font-weight: bold">
+			<br>
+			LAPORAN RESTITUSI BULANAN
+			<br>
+			Periode: 
+			@php
+				echo date('F Y');
+			@endphp
+		</div>
+	</div>
+	<div style="font-weight: bold">
+		<div>ID Pelanggan: <br>Nama Pelanggan: <br><br></div>
+		<div></div>
+		<div></div>
+		<div>Total Restitusi:</div>
+	</div>
+	<div>
+		<div>
+			<table class="table">
+				<thead class="">
+					<tr>
+						<th scope="col">Service ID</th>
+						<th scope="col">Nama Layanan</th>
+						<th scope="col">Konfigurasi</th>
+						<th scope="col">Alamat</th>
+						<th scope="col">SLG</th>
+						<th scope="col">AV</th>
+						<th scope="col">Jumlah Kompensasi</th>
+					</tr>
+				</thead>
+				<tbody>
+                    @php
                         // get total sec in one month
                         // thanks to https://stackoverflow.com/questions/7651263/subtract-1-day-with-php
                         $create = date_create(date('Y')."-".date('m')."-"."01");
@@ -74,18 +83,14 @@
                                     @endphp
                                     {{ number_format((float)$percentage, 2, '.', '') }}%
                                 </td>
-                                <td>
-                                    @php
-                                        $selisih = $k->kontrak->level_garansi_layanan - $percentage;
-                                        if ($selisih < 0) {
-                                            echo "0%";
-                                        } else {
-                                            echo number_format((float)abs($selisih), 2, '.', '')."%";
-                                            $selisih = 100 - $selisih;
-                                            $selisih = number_format((float)abs($selisih), 2, '.', '');
-                                        }
-                                    @endphp
-                                </td>
+                                @php
+                                    $selisih = $k->kontrak->level_garansi_layanan - $percentage;
+                                    if ($selisih < 0) {
+                                    } else {
+                                        $selisih = 100 - $selisih;
+                                        $selisih = number_format((float)abs($selisih), 2, '.', '');
+                                    }
+                                @endphp
                                 <td>
                                     @php
                                     if ($selisih < 0) {
@@ -103,12 +108,27 @@
                         <tr><th>Belum ada langganan layanan</th></tr>
                     @endif
                 </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">Menampilkan Periode: Januari 2019</div>
-        <div class="col"><a href="">Lihat Bukti Transfer</a></div>
-        <div class="col text-right"><a target="_blank" href="/pelanggan/download/restitusi" class="btn btn-success">Download</a></div>
-    </div>
-@endsection
+			</table>
+		</div>
+	</div>
+	<br><br>
+	<div>
+		<div style="font-style:italic;font-size:0.9em">
+			Keterangan: <br>
+			*TTR (Time To Resolve)<br>
+			*SLG (Level Garansi Layanan)<br>
+			*AV (Ketersediaan Layanan)<br>
+			Total detik per bulan : {{$total_sec}}
+		</div>
+		<div></div>
+		<div></div>
+		<div>
+			Jakarta, {{date('d F Y')}} <br> 
+			Manager Service Level Guarantee 
+			<br><br><br><br>
+			<br><br><br><br>
+			(...................................................................)
+		</div>
+	</div>
+</body>
+</html>

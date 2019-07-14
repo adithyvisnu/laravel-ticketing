@@ -113,7 +113,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-7">
-                                <label class="col col-form-label">Total Pemasangan Layanan : 56</label>
+                                <label class="col col-form-label">Total Pemasangan Layanan : </label>
                                 <label class="col col-form-label">Total Biaya Per Bulan: <br>
                                 <h1 class="display-5"><span id="total">0</span></h1>
                                 </label>
@@ -123,7 +123,7 @@
                                     Standar Garansi (dalam %)
                                 </div>
                                 <div class="col">
-                                    <input type="number" name="slg" id="" min="0" max="99">
+                                    <input type="number" name="slg" id="" min="0" max="99.9" step="0.1" value="99">
                                 </div>
                             </div>
                         </div>

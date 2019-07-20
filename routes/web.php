@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/','PageController@Login');
 Route::get('/login', 'PageController@Login');
+Route::post('/login', 'PageController@PostLogin');
+Route::get('/logout', 'PageController@Logout');
 Route::get('/admin/layanan', 'AdminController@Layanan');
 Route::get('/admin/jabatan', 'AdminController@Jabatan');
 Route::get('/admin/karyawan', 'AdminController@Karyawan');

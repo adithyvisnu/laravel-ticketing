@@ -40,6 +40,7 @@ class BASolusiController extends Controller
         $b = new BASolusi;
         $b->kode_tiket = $request->input('kode_tiket');
         $b->tanggal_ba_solusi = date_create()->format('Y-m-d H:i:s');
+        $b->solusi_oleh = $request->input('pic_solusi');
         $b->save();
         $kode_ba_solusi = $b->kode_ba_solusi;
 

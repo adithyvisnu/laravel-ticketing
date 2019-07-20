@@ -33,8 +33,14 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label class="col-form-label">Keluhan</label><br>
+                                    <label class="col-form-label">Keterangan Penanganan</label><br>
                                     <textarea class="form-control" maxlength="255" class="form-control" id="keterangan_solusi"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="col-form-label">PIC Solusi</label><br>
+                                    <input type="text" class="form-control" maxlength="255" name="pic_solusi">
                                 </div>
                             </div>
                         </div>
@@ -148,10 +154,14 @@
                                 @endif
                             </td>
                             <td>
-                                Adithya Visnu
+                                @if(!is_null($t->ba_solusi))
+                                    {{$t->ba_solusi->solusi_oleh}}
+                                @else
+                                    -
+                                @endif
                             </td>
                             <td>
-                                @if(is_null($t->ba_solusi))
+                                @if(is_null($t->ba_solusi) && is_null($t->ba_selesai))
                                     <a href="#" onclick="get_tiket_ba_solusi({{$t->kode_tiket}})">Buat BA Solusi</a>
                                 @elseif(is_null($t->ba_selesai))
                                     <a href="#" onclick="get_tiket_ba_selesai({{$t->kode_tiket}})">Close Tiket</a>

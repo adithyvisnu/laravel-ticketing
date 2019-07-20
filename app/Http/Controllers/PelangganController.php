@@ -48,7 +48,7 @@ class PelangganController extends Controller
             $filenameWithExt = $request->file('file')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('file')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'-'.$kode_kontrak.'-'.time().$extension;
+            $fileNameToStore = $filename.'-'.$kode_pelanggan.'-'.time().$extension;
             $path = $request->file('file')->storeAs('public/kontrak', $fileNameToStore);
         } else {
             $fileNameToStore = '';

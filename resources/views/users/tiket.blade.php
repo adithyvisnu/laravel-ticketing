@@ -121,7 +121,11 @@
                                 @endif
                             </td>
                             <td>
-                                Adithya Visnu
+                                @if(!is_null($t->ba_solusi))
+                                    {{$t->ba_solusi->solusi_oleh}}
+                                @else
+                                    -
+                                @endif
                             </td>
                             <td>
                                 @if(is_null($t->ba_selesai))
@@ -139,6 +143,5 @@
             </table>
         </div>
     </div>
-    
 <script src="{{ asset('js/forms.js')}}"></script>
 @endsection

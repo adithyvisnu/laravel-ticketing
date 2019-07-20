@@ -160,54 +160,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">Adithya Visnu 1 </th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Adithya Visnu 2 </th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Adithya Visnu 3</th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Adithya Visnu 4</th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Adithya Visnu5 </th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Adithya Visnu 6</th>
-                        <td>adithyavisnu@gmail.com</td>
-                        <td>08112130801</td>
-                        <td>137134098130493</td>
-                        <td>6</td>
-                        <td>102</td>
-                    </tr>
+                    @if(count($dataPelanggan) > 0)
+                        @foreach ($dataPelanggan as $p)
+                        <tr id="tiket-{{$p->kode_pelanggan}}">
+                            <th scope="row">{{$p->nama_pelanggan}}</th>
+                            <td>{{$p->email_pelanggan}}</td>
+                            <td>{{$p->no_telepon}}</td>
+                            <td>{{$p->npwp}}</td>
+                            <td>{{count($p->kontrak)}}</td>
+                            <td>{{count($p->kontrak)}}</td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr><td colspan="8">Data karyawan belum tersedia di sistem</td></tr>
+                    @endif
                 </tbody>
             </table>
         </div>

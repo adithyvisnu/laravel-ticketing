@@ -9,6 +9,7 @@ use App\JenisKeluhan;
 use App\JenisSolusi;
 use App\Tiket;
 use App\DetilKontrak;
+use App\Pelanggan;
 use PDF;
 
 class KaryawanController extends Controller
@@ -34,7 +35,7 @@ class KaryawanController extends Controller
 
     public function TiketGangguan()
     {
-         $data = [
+        $data = [
             "title" => "Data Tiket Gangguan",
             "menu" => "tiket",
             "dataTiket" => Tiket::with('jenis_keluhan')->get()
@@ -46,7 +47,8 @@ class KaryawanController extends Controller
          $data = [
             "title" => "Aktivasi dan Data Pelanggan",
             "menu" => "aktivasi",
-            "dataLayanan" => Layanan::all()
+            "dataLayanan" => Layanan::all(),
+            "dataPelanggan" => Pelanggan::with('kontrak')->get()
         ];
         return view('karyawan.aktivasi')->with($data);
     }

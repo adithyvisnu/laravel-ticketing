@@ -18,15 +18,18 @@
                 <br>
                 <br>
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background: ">
-                    <a href="/karyawan/tiket" class="nav-link @if ($menu == 'tiket') active @endif">Tiket Gangguan</a>
-                    <a href="/karyawan/aktivasi" class="nav-link @if ($menu == 'aktivasi') active @endif">Aktivasi Pelanggan</a>
-                    <a href="/karyawan/pembayaran/restitusi" class="nav-link @if ($menu == 'bayarRestitusi') active @endif">Pembayaran Restitusi</a>
-                    <a href="/karyawan/pemetaan-solusi" class="nav-link @if ($menu == 'solusiKeluhan') active @endif">Pemetaan Solusi-Keluhan</a>
-                    <a href="/karyawan/laporan/tiket" class="nav-link @if ($menu == 'lapTiket') active @endif">Laporan Tiket</a>
-                    <a href="/karyawan/laporan/restitusi" class="nav-link @if ($menu == 'lapRestitusi') active @endif">Laporan Restitusi</a>
+                    <a class="nav-link disabled">Data Master</a>
+                    <a style="padding-left:40px;" href="/karyawan/aktivasi" class="nav-link @if ($menu == 'aktivasi') active @endif">Aktivasi Pelanggan</a>
+                    <a style="padding-left:40px;" href="/karyawan/pemetaan-solusi" class="nav-link @if ($menu == 'solusiKeluhan') active @endif">Entry Data Jenis Keluhan dan Solusi</a>
+                    <a class="nav-link disabled">Data Transaksi</a>
+                    <a style="padding-left:40px;" href="/karyawan/tiket" class="nav-link @if ($menu == 'tiket') active @endif">Entry Berita Acara Solusi dan Selesai</a>
+                    <a style="padding-left:40px;" href="/karyawan/pembayaran/restitusi" class="nav-link @if ($menu == 'bayarRestitusi') active @endif">Upload Tanda Transfer Restitusi</a>
+                    <a class="nav-link disabled">Data Laporan</a>
+                    <a style="padding-left:40px;" href="/karyawan/laporan/tiket" class="nav-link @if ($menu == 'lapTiket') active @endif">Laporan Tiket</a>
+                    <a style="padding-left:40px;" href="/karyawan/laporan/restitusi" class="nav-link @if ($menu == 'lapRestitusi') active @endif">Laporan Restitusi</a>
                 </div>
-                <div class="position-absolute" style="margin-bottom: 0%;padding:10px">
-                    <a class="btn btn-info" style="bottom:0; margin-bottom: 10%"> Logout </a>
+                <div class="position-absolute" style="margin-top: 100%;padding:10px">
+                    <a href="/logout" class="btn btn-info" style="bottom:0; margin-bottom: 10%"> Logout </a>
                 </div>
             </div>  
             <div class="col-10 p-5">

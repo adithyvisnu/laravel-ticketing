@@ -25,4 +25,7 @@ class Tiket extends Model
     public function ba_selesai(){
         return $this->hasOne('App\BASelesai', 'kode_tiket', 'kode_tiket');
     }
+    public function restitusi(){
+        return $this->hasOne('App\Restitusi', 'kode_tiket', 'kode_tiket');
+    }
 }

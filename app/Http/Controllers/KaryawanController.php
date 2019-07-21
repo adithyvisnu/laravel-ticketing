@@ -35,6 +35,10 @@ class KaryawanController extends Controller
 
     public function TiketGangguan()
     {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
         $data = [
             "title" => "Data Tiket Gangguan",
             "menu" => "tiket",
@@ -44,6 +48,10 @@ class KaryawanController extends Controller
     }
 
     public function AktivasiPelanggan() {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
          $data = [
             "title" => "Aktivasi dan Data Pelanggan",
             "menu" => "aktivasi",
@@ -54,15 +62,25 @@ class KaryawanController extends Controller
     }
 
     public function PembayaranRestitusi() {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
         $data = [
             "title" => "Form Bukti Transfer Restitusi",
             "menu" => "bayarRestitusi",
-            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
+            "dataPelanggan" => Pelanggan::all(),
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get(),
+            "dataPeriode" => []
         ];
         return view('karyawan.restitusi')->with($data);
     }
 
     public function PemetaanSolusi() {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
         $data = [
             "title" => "Form Pemetaan Jenis Solusi dan Jenis Keluhan",
             "menu" => "solusiKeluhan",
@@ -73,6 +91,10 @@ class KaryawanController extends Controller
     }
 
     public function LaporanTiket() {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
         $data = [
             "title" => "Cetak Laporan Tiket",
             "menu" => "lapTiket"
@@ -81,6 +103,10 @@ class KaryawanController extends Controller
     }
 
     public function LaporanRestitusi() {
+        $sess = \Session::get('users');
+        if(!$sess || !$sess->email_karyawan) {
+            return redirect('/logout');
+        }
         $data = [
            "title" => "Cetak Laporan Restitusi",
            "menu" => "lapRestitusi"

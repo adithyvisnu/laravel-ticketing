@@ -20,6 +20,11 @@
                             <select class="form-control" name="kode_service_id" >
                                 <option selected disabled hidden>Pilih Service ID</option>
                             @foreach ($dataDetilKontrak as $dk)
+                                @php
+                                    if($dk->kontrak == null) {
+                                        continue;
+                                    }
+                                @endphp
                                 <option value="{{$dk->kode_service_id}}">
                                     {{$dk->kode_service_id}}
                                     <br> - <small>{{$dk->alamat}}</small>

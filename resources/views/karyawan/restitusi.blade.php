@@ -51,14 +51,11 @@
                         <div class="form-group row">
                             <label class="col-4 col-form-label">Pelanggan</label>
                             <div class="col-8">
-                                <input type="text" maxlength="40" class="form-control" name="id_ticket" >
-                            </div>
-                        </div>
-                        <div class="form-group row">                    
-                            <label class="col-4 col-form-label">Kontrak</label>
-                            <div class="col-8">
-                                <select class="form-control" name="id_kontrak">
-                                    <option value="1">KTel/2018/08/19</option>
+                                <select name="kode_pelanggan" required class="custom-select">
+                                    <option selected disabled hidden>Choose...</option>
+                                    @foreach ($dataPelanggan as $p)
+                                        <option value="{{$p->kode_pelanggan}}">{{$p->nama_pelanggan}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -113,7 +110,7 @@
                     @if(count($dataDetilKontrak) > 0)
                         @foreach ($dataDetilKontrak as $k)
                             <tr>
-                                <th scope="row">{{$k->kode_service_id}}</th>
+                            <th scope="row">{{$k->kode_service_id}}</th>
                                 <td>{{$k->layanan->nama_layanan}}</td>
                                 <td width="20%">{{$k->layanan->konfigurasi_layanan}}</td>
                                 <td>{{$k->alamat}}</td>
@@ -129,7 +126,7 @@
                                             // thanks to https://stackoverflow.com/questions/3176609/calculate-total-seconds-in-php-dateinterval
                                             $date_awal = date_create($t->tanggal_waktu_buat);
                                             $date_akhir = date_create($t->tanggal_waktu_selesai);
-                                            $total_time = $date_akhir->getTimestamp() - $date_awal->getTimestamp();
+                                            $total_time += $date_akhir->getTimestamp() - $date_awal->getTimestamp();
                                         @endphp
                                     @endforeach
                                     @php
@@ -150,15 +147,6 @@
                                     @endphp
                                 </td>
                                 <td>
-                                    @php
-                                    if ($selisih < 0) {
-                                        echo '-';
-                                    } else {
-                                        $selisih = 100 - $selisih;
-                                        $restitusi = ($selisih/100) * $k->layanan->harga;
-                                        echo "Rp ".number_format($restitusi);
-                                    }
-                                    @endphp
                                 </td>  
                             </tr>
                         @endforeach

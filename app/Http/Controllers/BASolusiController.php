@@ -37,10 +37,11 @@ class BASolusiController extends Controller
      */
     public function store(Request $request)
     {
+        $sess = \Session::get('users');
         $b = new BASolusi;
         $b->kode_tiket = $request->input('kode_tiket');
         $b->tanggal_ba_solusi = date_create()->format('Y-m-d H:i:s');
-        $b->solusi_oleh = $request->input('pic_solusi');
+        $b->solusi_oleh = $sess->nama_karyawan;
         $b->save();
         $kode_ba_solusi = $b->kode_ba_solusi;
 
@@ -61,7 +62,7 @@ class BASolusiController extends Controller
         DetilSolusi::insert($arr);
 
         $t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
-        $t->nik = 910023;
+        $t->nik = $sess->nik;
         $t->save();
 
         return redirect()->back();

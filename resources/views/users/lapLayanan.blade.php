@@ -41,7 +41,12 @@
                         $total_sec = $total_day * 60 * 60 * 24;
                     @endphp
                     @if(count($dataDetilKontrak) > 0)
-                        @foreach ($dataDetilKontrak as $k)
+                        @foreach ($dataDetilKontrak as $k)'
+                            @php
+                                if($k->kontrak == null){
+                                    continue;
+                                }
+                            @endphp
                             <tr>
                                 <th scope="row">{{$k->kode_service_id}}</th>
                                 <td>{{$k->layanan->nama_layanan}}</td>

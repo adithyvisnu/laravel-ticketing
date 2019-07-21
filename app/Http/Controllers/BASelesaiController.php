@@ -36,11 +36,19 @@ class BASelesaiController extends Controller
      */
     public function store(Request $request)
     {
+        $sess = \Session::get('users');
+        $solvedBy = "";
+        if($sess->email_pelanggan) {
+            $solvedBy = "p-".$sess->kode_pelanggan;
+        } else if($sess->email_karyawan) {
+            $solvedBy = "k".$sess->nik;
+        }
+
         $date = date_create()->format('Y-m-d H:i:s');
         $b = new BASelesai;
         $b->kode_tiket = $request->input('kode_tiket');
         $b->tanggal_ba_selesai = $date;
-        $b->selesai_oleh = "Gani Amri";
+        $b->selesai_oleh = $solvedBy;
         
         if($request->hasFile('bukti_close')){
             $filenameWithExt = $request->file('bukti_close')->getClientOriginalName();
@@ -55,9 +63,12 @@ class BASelesaiController extends Controller
         $b->bukti_ba_selesai = $fileNameToStore;
         $b->save();
 
-        $t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
-        $t->tanggal_waktu_selesai = $date;
-        $t->save();
+        // $t = Tiket::where('kode_tiket', '=' ,$request->input('kode_tiket'))->firstOrFail();
+        // $t->tanggal_waktu_selesai = $date;
+        // $t->save();
+
+        
+        app('App\Http\Controllers\RestitusiController')->store($request);
 
         return redirect()->back();
     }

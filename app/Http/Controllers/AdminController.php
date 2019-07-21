@@ -11,6 +11,10 @@ class AdminController extends Controller
 {
     public function Layanan()
     {
+        $sess = \Session::get('users');
+        if(!$sess || $sess!='admin') {
+            return redirect('/logout');
+        }
         # code...
         $data = [
             "title" => 'Data Layanan',
@@ -22,6 +26,9 @@ class AdminController extends Controller
 
     public function Jabatan()
     {
+        if(!$sess || $sess!='admin') {
+            return redirect('/logout');
+        }
         # code...
         $data = [
             "title" => 'Data Jabatan',
@@ -33,6 +40,9 @@ class AdminController extends Controller
     
     public function Karyawan()
     {
+        if(!$sess || $sess!='admin') {
+            return redirect('/logout');
+        }
         # code...
         $data = [
             "title" => 'Data Karyawan',

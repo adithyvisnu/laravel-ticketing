@@ -160,3 +160,25 @@ function cek_selesai(){
         }
     );
 }
+
+function get_detail_solusi(id){
+    $.ajax({
+        type:'GET',
+        url:'/ba-solusi/'+id,
+        data:'_token = <?php echo csrf_token() ?>',
+        success:function(data) {
+            var tanggal = data.tanggal_ba_solusi;
+            var solusi_oleh = data.solusi_oleh;
+            var keterangan = data.detil_solusi.map(function(e){
+                return e.keterangan
+            });
+            alert(
+                'Tanggal Solusi : '+tanggal+'\n'+
+                'Solusi Oleh : '+solusi_oleh+'\n'+
+                'Penanganan : \n '+
+                    keterangan.join('\n')
+                +'\n'
+            );
+        }
+    });
+}

@@ -10,14 +10,11 @@
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Pelanggan</label>
                         <div class="col-8">
-                            <input type="text" maxlength="40" class="form-control" name="id_ticket" >
-                        </div>
-                    </div>
-                    <div class="form-group row">                    
-                        <label class="col-4 col-form-label">Kontrak</label>
-                        <div class="col-8">
-                            <select class="form-control" name="id_kontrak">
-                                <option value="1">KTel/2018/08/19</option>
+                            <select name="kode_pelanggan" required class="custom-select">
+                                <option selected disabled hidden>Choose...</option>
+                                @foreach ($dataPelanggan as $p)
+                                    <option value="{{$p->kode_pelanggan}}">{{$p->nama_pelanggan}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -25,7 +22,7 @@
                         <label class="col-4 col-form-label">Periode</label>
                         <div class="col-8">
                             <select class="form-control" name="id_jenis_keluhan">
-                                <option value="201901">Januari 2019</option>
+                                <option value="201907">Juli 2019</option>
                             </select>
                         </div>
                     </div>
@@ -47,7 +44,8 @@
         <div class="col">
             <fieldset class="border p-3">
                 <legend>Form Bukti Transfer Restitusi</legend>
-                    <form action="">
+                    <form action="/bukti-transfer" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group row">
                             <label class="col-4 col-form-label">Pelanggan</label>
                             <div class="col-8">
@@ -62,20 +60,20 @@
                         <div class="form-group row">                    
                             <label class="col-4 col-form-label">Periode</label>
                             <div class="col-8">
-                                <select class="form-control" name="id_jenis_keluhan">
-                                    <option value="201901">Januari 2019</option>
+                                <select class="form-control" name="periode">
+                                    <option value="201907">Juli 2019</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label">Periode</label>
+                            <label class="col-4 col-form-label">Bukti Transfer</label>
                             <div class="col">
-                                <input type="file" name="bukti_close" alt="Upload Bukti Close Tiket">
+                                <input type="file" name="bukti_trf" alt="Upload Bukti Transfer Restitusi">
                             </div>
                         </div>        
                         <div class="form-group row">
                             <div class="col" style="vertical-align:bottom">
-                                <input type="submit" class="btn btn-success float-right" value="Close Tiket Gangguan">
+                                <input type="submit" class="btn btn-success float-right" value="Submit Bukti Transfer Restitusi">
                             </div>
                         </div>
                     </form>

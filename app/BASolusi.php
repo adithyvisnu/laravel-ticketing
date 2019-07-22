@@ -13,4 +13,8 @@ class BASolusi extends Model
     {
         return $this->belongsTo('App\Tiket', 'kode_tiket', 'kode_tiket');
     }
+    public function detil_solusi()
+    {
+        return $this->hasMany('App\DetilSolusi', 'kode_ba_solusi', 'kode_ba_solusi');
+    }
 }

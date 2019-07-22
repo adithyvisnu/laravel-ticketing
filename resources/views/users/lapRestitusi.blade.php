@@ -8,15 +8,7 @@
                 <div class="form-group mx-sm-3 mb-2">
                     <select class="form-control" name="periode">
                         <option value="">Periode</option>
-                        <option value="201902">Februari 2019</option>
-                        <option value="201901">Januari 2019</option>
-                    </select>
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <select class="form-control" name="periode">
-                        <option value="">Judul Kontrak</option>
-                        <option value="201902">KTel/2018/9/2001</option>
-                        <option value="201901">Januari 2019</option>
+                        <option value="201907">Juli 2019</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-info mb-2">Pilih</button>
@@ -113,7 +105,7 @@
     </div>
     <div class="row">
         <div class="col">Menampilkan Periode: Januari 2019</div>
-        <div class="col"><a href="">Lihat Bukti Transfer</a></div>
+        <div class="col"><a href="/storage/bukti_trf/{{$dataRestitusi->bukti_transfer}}">Lihat Bukti Transfer</a></div>
         <div class="col text-right"><a target="_blank" href="/pelanggan/download/restitusi" class="btn btn-success">Download</a></div>
     </div>
 @endsection

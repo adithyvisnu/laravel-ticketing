@@ -8,6 +8,7 @@ use App\Kontrak;
 use App\DetilKontrak;
 use App\JenisKeluhan;
 use App\Tiket;
+use App\BuktiTransfer;
 use PDF;
 
 class PelangganController extends Controller
@@ -147,7 +148,8 @@ class PelangganController extends Controller
             "menu" => "lapRestitusi",
             "dataDetilKontrak" => DetilKontrak::with(['kontrak' => function ($q) use ($kode_pelanggan) {
                 $q->where('kontrak.kode_pelanggan', $kode_pelanggan);
-            }],'layanan','tiket')->get()
+            }],'layanan','tiket')->get(),
+            "dataRestitusi" => BuktiTransfer::where('kode_pelanggan', $kode_pelanggan)->first()
         ];
         return view('users.lapRestitusi')->with($data);
     }

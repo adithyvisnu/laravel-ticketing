@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\BuktiTransfer;
 
 class BuktiTransferController extends Controller
 {
@@ -35,10 +36,10 @@ class BuktiTransferController extends Controller
     public function store(Request $request)
     {
         $date = date_create()->format('Y-m-d H:i:s');
-        $b = new BASelesai;
-        $b->kode_tiket = $request->input('kode_tiket');
-        $b->tanggal_ba_selesai = $date;
-        $b->selesai_oleh = $solvedBy;
+        $b = new BuktiTransfer;
+        $b->kode_pelanggan = $request->input('kode_pelanggan');
+        $b->tanggal_transfer = $date;
+        $b->periode_layanan = $request->input('periode');
         
         if($request->hasFile('bukti_trf')){
             $filenameWithExt = $request->file('bukti_trf')->getClientOriginalName();
@@ -50,8 +51,9 @@ class BuktiTransferController extends Controller
             $fileNameToStore = '';
         }
 
-        $b->bukti_ba_selesai = $fileNameToStore;
+        $b->bukti_transfer = $fileNameToStore;
         $b->save();
+        return redirect('/karyawan/pembayaran/restitusi');
     }
 
     /**

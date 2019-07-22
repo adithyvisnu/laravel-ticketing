@@ -70,8 +70,7 @@ class KaryawanController extends Controller
             "title" => "Form Bukti Transfer Restitusi",
             "menu" => "bayarRestitusi",
             "dataPelanggan" => Pelanggan::all(),
-            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get(),
-            "dataPeriode" => []
+            "dataDetilKontrak" => DetilKontrak::with('kontrak','layanan','tiket')->get()
         ];
         return view('karyawan.restitusi')->with($data);
     }

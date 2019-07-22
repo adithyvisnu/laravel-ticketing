@@ -76,7 +76,7 @@ class BASolusiController extends Controller
      */
     public function show($id)
     {
-        //
+        return BASolusi::with('detil_solusi')->where('kode_ba_solusi', $id)->first();
     }
 
     /**

@@ -37,12 +37,6 @@
                                     <textarea class="form-control" maxlength="255" class="form-control" id="keterangan_solusi"></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="col-form-label">PIC Solusi</label><br>
-                                    <input type="text" class="form-control" maxlength="255" name="pic_solusi">
-                                </div>
-                            </div>
                         </div>
                         <div id="list_solusi">
                             <input type="number" hidden readonly id="count" value="0">
@@ -141,20 +135,22 @@
                             <td>{{$t->tanggal_waktu_buat}}</td>
                             <td>
                                 @if(!is_null($t->ba_solusi))
-                                    {{$t->ba_solusi->tanggal_ba_solusi}}
+                                    <a href="#" onclick="get_detail_solusi({{$t->ba_solusi->kode_ba_solusi}})">{{$t->ba_solusi->tanggal_ba_solusi}}</a>
                                 @else
                                     -
                                 @endif
                             </td>
                             <td>
                                 @if(!is_null($t->ba_selesai))
-                                    {{$t->ba_selesai->tanggal_ba_selesai}}
+                                    <a href="/storage/bukti_close/{{$t->ba_selesai->bukti_ba_selesai}}">{{$t->ba_selesai->tanggal_ba_selesai}}</a>
                                 @else
                                     -
                                 @endif
                             </td>
                             <td>
-                                @if(!is_null($t->ba_solusi))
+                                @if(!is_null($t->ba_selesai))
+                                    {{$t->ba_selesai->selesai_oleh}}
+                                @elseif(!is_null($t->ba_solusi))
                                     {{$t->ba_solusi->solusi_oleh}}
                                 @else
                                     -
